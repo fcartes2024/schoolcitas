@@ -683,7 +683,7 @@ function Dashboard({ db, currentUser, showToast, onEditTemas, onPrint, updateRes
             </h3>
             <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">GestiÃ³n en tiempo real</p>
           </div>
-          <div className="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-blue-600 shadow-sm">
+          <div className="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-400 shadow-sm">
             <Calendar className="w-4 h-4" />
           </div>
         </div>
@@ -713,16 +713,16 @@ function Dashboard({ db, currentUser, showToast, onEditTemas, onPrint, updateRes
                     : (isAdmin ? `${docenteUser?.nombre} con ${apoderado?.nombre}` : docenteUser?.nombre);
 
                   return (
-                    <tr key={r.id} className="hover:bg-blue-50/30 transition-colors group">
+                    <tr key={r.id} className="hover:bg-slate-50/30 transition-colors group">
                       <td className="px-6 py-5">
                         <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-slate-300 border border-slate-100 group-hover:bg-blue-600 group-hover:text-white transition-colors shadow-sm">
+                          <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-slate-300 border border-slate-100 group-hover:bg-slate-300 group-hover:text-slate-600 transition-colors shadow-sm">
                             <User className="w-5 h-5" />
                           </div>
                           <div>
                             <p className="font-black text-slate-900 text-sm tracking-tight">{otherName}</p>
                             <div className="flex items-center gap-3 mt-1">
-                              <p className="text-[9px] text-blue-700 font-black uppercase tracking-widest flex items-center gap-1.5">
+                              <p className="text-[9px] text-slate-500 font-black uppercase tracking-widest flex items-center gap-1.5">
                                 <Clock className="w-3 h-3" />
                                 {r.hora}
                               </p>
@@ -733,8 +733,8 @@ function Dashboard({ db, currentUser, showToast, onEditTemas, onPrint, updateRes
                             </div>
                             {(!isApoderado || r.estado === 'asistio') && r.temas && (
                               <div className="mt-2.5 bg-slate-50 border border-slate-100 rounded-lg p-2.5 text-[11px] text-slate-600 font-medium italic relative overflow-hidden">
-                                <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-blue-600"></div>
-                                <span className="font-black text-blue-900 not-italic uppercase tracking-tighter mr-2 text-[9px]">Temas:</span>
+                                <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-slate-400"></div>
+                                <span className="font-black text-slate-600 not-italic uppercase tracking-tighter mr-2 text-[9px]">Temas:</span>
                                 {r.temas}
                               </div>
                             )}
