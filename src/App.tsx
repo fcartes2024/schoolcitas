@@ -1,4 +1,4 @@
-import React, { useState, useMemo, lazy, Suspense } from 'react';
+﻿import React, { useState, useMemo, lazy, Suspense } from 'react';
 import { 
   Calendar, 
   CalendarCheck, 
@@ -104,7 +104,7 @@ function App() {
     const email = formData.get('email') as string;
     
     if (db.usuarios.find(u => u.email === email)) {
-      showToast('El correo ya está registrado', 'error');
+      showToast('El correo ya estÃ¡ registrado', 'error');
       return;
     }
 
@@ -130,7 +130,7 @@ function App() {
       <div className="min-h-screen flex items-center justify-center bg-slate-900">
         <div className="text-white text-center">
           <div className="w-16 h-16 border-4 border-white/20 border-t-blue-500 rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="font-bold uppercase tracking-widest text-xs">Cargando conexión...</p>
+          <p className="font-bold uppercase tracking-widest text-xs">Cargando conexiÃ³n...</p>
         </div>
       </div>
     );
@@ -140,16 +140,16 @@ function App() {
   if (!currentSchool) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-900 dark:bg-slate-950 p-4 relative overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] w-[70%] h-[70%] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none animate-pulse"></div>
+        <div className="absolute top-[-10%] left-[-10%] w-[70%] h-[70%] bg-emerald-600/20 rounded-full blur-[120px] pointer-events-none animate-pulse"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[70%] h-[70%] bg-indigo-600/20 rounded-full blur-[120px] pointer-events-none animate-pulse"></div>
         
         <div className="w-full max-w-2xl relative z-10">
           <div className="text-center mb-12 fade-in">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-white dark:bg-blue-600 text-blue-700 dark:text-white mb-6 shadow-2xl shadow-blue-900/50">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-white dark:bg-emerald-600 text-blue-700 dark:text-white mb-6 shadow-2xl shadow-blue-900/50">
               <CalendarCheck className="w-10 h-10" />
             </div>
             <h1 className="text-4xl font-black text-white dark:text-white tracking-tighter mb-2 uppercase italic">SchoolCitas</h1>
-            <p className="text-blue-200 dark:text-blue-300 font-bold uppercase tracking-[0.3em] text-[10px]">Portal de Gestión Multi-Colegio</p>
+            <p className="text-blue-200 dark:text-blue-300 font-bold uppercase tracking-[0.3em] text-[10px]">Portal de GestiÃ³n Multi-Colegio</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 fade-in">
@@ -159,7 +159,7 @@ function App() {
                 onClick={() => selectSchool(school)}
                 className="group bg-white/10 dark:bg-slate-800/50 backdrop-blur-xl border border-white/10 dark:border-slate-700/50 p-6 rounded-[2.5rem] hover:bg-white/20 dark:hover:bg-slate-700/50 transition-all text-center flex flex-col items-center gap-4 hover:scale-105 active:scale-95 shadow-2xl"
               >
-                <div className="w-20 h-20 rounded-3xl bg-white/10 dark:bg-slate-700 flex items-center justify-center text-white group-hover:bg-blue-600 dark:group-hover:bg-blue-600 group-hover:scale-110 transition-all overflow-hidden">
+                <div className="w-20 h-20 rounded-3xl bg-white/10 dark:bg-slate-700 flex items-center justify-center text-white group-hover:bg-emerald-600 dark:group-hover:bg-emerald-600 group-hover:scale-110 transition-all overflow-hidden">
                   {school.logo ? (
                     <img src={school.logo} alt={school.name} className="w-full h-full object-cover" />
                   ) : (
@@ -195,7 +195,7 @@ function App() {
   if (!currentUser) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-900 dark:bg-slate-950 p-4 relative overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] w-[70%] h-[70%] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none animate-pulse"></div>
+        <div className="absolute top-[-10%] left-[-10%] w-[70%] h-[70%] bg-emerald-600/20 rounded-full blur-[120px] pointer-events-none animate-pulse"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[70%] h-[70%] bg-indigo-600/20 rounded-full blur-[120px] pointer-events-none animate-pulse"></div>
         
         <div className="w-full max-w-md relative z-10">
@@ -217,31 +217,31 @@ function App() {
                 <h2 className="text-3xl font-black mb-8 text-slate-900 dark:text-white tracking-tight uppercase text-center italic">Acceso</h2>
                 <form onSubmit={handleLoginSubmit} className="space-y-6">
                   <div className="space-y-2">
-                    <label className="block text-[10px] font-black text-blue-500 dark:text-blue-400 uppercase tracking-widest ml-1">Correo electrónico</label>
+                    <label className="block text-[10px] font-black text-emerald-500 dark:text-blue-400 uppercase tracking-widest ml-1">Correo electrÃ³nico</label>
                     <div className="relative group">
-                      <Mail className="absolute left-4 top-4 w-5 h-5 text-slate-300 dark:text-slate-500 group-focus-within:text-blue-600 dark:group-focus-within:text-blue-400 transition-colors" />
+                      <Mail className="absolute left-4 top-4 w-5 h-5 text-slate-300 dark:text-slate-500 group-focus-within:text-emerald-600 dark:group-focus-within:text-blue-400 transition-colors" />
                       <input 
                         type="email" 
                         name="email" 
                         required 
                         onChange={(e) => setAuthEmail(e.target.value)}
                         disabled={loginRateLimit.blocked}
-                        className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent dark:border-slate-700 rounded-2xl focus:bg-white dark:focus:bg-slate-700 focus:border-blue-600 dark:focus:border-blue-500 transition-all text-sm outline-none font-bold text-slate-900 dark:text-white placeholder:text-slate-200 dark:placeholder:text-slate-500 disabled:opacity-50 disabled:cursor-not-allowed" 
+                        className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent dark:border-slate-700 rounded-2xl focus:bg-white dark:focus:bg-slate-700 focus:border-emerald-600 dark:focus:border-blue-500 transition-all text-sm outline-none font-bold text-slate-900 dark:text-white placeholder:text-slate-200 dark:placeholder:text-slate-500 disabled:opacity-50 disabled:cursor-not-allowed" 
                         placeholder="usuario@ejemplo.com" 
                       />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <label className="block text-[10px] font-black text-blue-500 dark:text-blue-400 uppercase tracking-widest ml-1">Contraseña</label>
+                    <label className="block text-[10px] font-black text-emerald-500 dark:text-blue-400 uppercase tracking-widest ml-1">ContraseÃ±a</label>
                     <div className="relative group">
-                      <Lock className="absolute left-4 top-4 w-5 h-5 text-slate-300 dark:text-slate-500 group-focus-within:text-blue-600 dark:group-focus-within:text-blue-400 transition-colors" />
+                      <Lock className="absolute left-4 top-4 w-5 h-5 text-slate-300 dark:text-slate-500 group-focus-within:text-emerald-600 dark:group-focus-within:text-blue-400 transition-colors" />
                       <input 
                         type="password" 
                         name="password" 
                         required 
                         disabled={loginRateLimit.blocked}
-                        className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent dark:border-slate-700 rounded-2xl focus:bg-white dark:focus:bg-slate-700 focus:border-blue-600 dark:focus:border-blue-500 transition-all text-sm outline-none font-bold text-slate-900 dark:text-white placeholder:text-slate-200 dark:placeholder:text-slate-500 disabled:opacity-50 disabled:cursor-not-allowed" 
-                        placeholder="••••••••" 
+                        className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent dark:border-slate-700 rounded-2xl focus:bg-white dark:focus:bg-slate-700 focus:border-emerald-600 dark:focus:border-blue-500 transition-all text-sm outline-none font-bold text-slate-900 dark:text-white placeholder:text-slate-200 dark:placeholder:text-slate-500 disabled:opacity-50 disabled:cursor-not-allowed" 
+                        placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" 
                       />
                     </div>
                   </div>
@@ -259,15 +259,15 @@ function App() {
                   <button 
                     type="submit" 
                     disabled={loginRateLimit.blocked}
-                    className="w-full bg-blue-700 hover:bg-blue-800 disabled:bg-slate-300 dark:disabled:bg-slate-700 disabled:cursor-not-allowed text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-blue-200 dark:shadow-blue-900/30 flex items-center justify-center gap-3 group active:scale-[0.98] uppercase tracking-widest text-xs mt-4"
+                    className="w-full bg-emerald-700 hover:bg-emerald-800 disabled:bg-slate-300 dark:disabled:bg-slate-700 disabled:cursor-not-allowed text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-blue-200 dark:shadow-blue-900/30 flex items-center justify-center gap-3 group active:scale-[0.98] uppercase tracking-widest text-xs mt-4"
                   >
                     Entrar al portal
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
                   </button>
                 </form>
                 <div className="mt-10 text-center">
-                  <p className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest">¿Nuevo en la plataforma? 
-                    <button onClick={() => setAuthMode('register')} className="text-blue-700 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300 font-black ml-2 underline decoration-2 underline-offset-4">Regístrate gratis</button>
+                  <p className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest">Â¿Nuevo en la plataforma? 
+                    <button onClick={() => setAuthMode('register')} className="text-blue-700 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300 font-black ml-2 underline decoration-2 underline-offset-4">RegÃ­strate gratis</button>
                   </p>
                 </div>
               </>
@@ -276,46 +276,46 @@ function App() {
                 <h2 className="text-3xl font-black mb-8 text-slate-900 tracking-tight uppercase text-center italic">Registro</h2>
                 <form onSubmit={handleRegisterSubmit} className="space-y-6">
                   <div className="space-y-2">
-                    <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">Nombre completo</label>
+                    <label className="block text-[10px] font-black text-emerald-500 uppercase tracking-widest ml-1">Nombre completo</label>
                     <div className="relative group">
-                      <User className="absolute left-4 top-4 w-5 h-5 text-slate-300 group-focus-within:text-blue-600 transition-colors" />
+                      <User className="absolute left-4 top-4 w-5 h-5 text-slate-300 group-focus-within:text-emerald-600 transition-colors" />
                       <input 
                         type="text" 
                         name="nombre" 
                         required 
                         disabled={registerRateLimit.blocked}
-                        className="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:bg-white focus:border-blue-600 transition-all text-sm outline-none font-bold text-slate-900 placeholder:text-slate-200 disabled:opacity-50 disabled:cursor-not-allowed" 
+                        className="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:bg-white focus:border-emerald-600 transition-all text-sm outline-none font-bold text-slate-900 placeholder:text-slate-200 disabled:opacity-50 disabled:cursor-not-allowed" 
                         placeholder="Tu nombre" 
                       />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">Correo electrónico</label>
+                    <label className="block text-[10px] font-black text-emerald-500 uppercase tracking-widest ml-1">Correo electrÃ³nico</label>
                     <div className="relative group">
-                      <Mail className="absolute left-4 top-4 w-5 h-5 text-slate-300 group-focus-within:text-blue-600 transition-colors" />
+                      <Mail className="absolute left-4 top-4 w-5 h-5 text-slate-300 group-focus-within:text-emerald-600 transition-colors" />
                       <input 
                         type="email" 
                         name="email" 
                         required 
                         onChange={(e) => setAuthEmail(e.target.value)}
                         disabled={registerRateLimit.blocked}
-                        className="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:bg-white focus:border-blue-600 transition-all text-sm outline-none font-bold text-slate-900 placeholder:text-slate-200 disabled:opacity-50 disabled:cursor-not-allowed" 
+                        className="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:bg-white focus:border-emerald-600 transition-all text-sm outline-none font-bold text-slate-900 placeholder:text-slate-200 disabled:opacity-50 disabled:cursor-not-allowed" 
                         placeholder="email@ejemplo.com" 
                       />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">Contraseña</label>
+                    <label className="block text-[10px] font-black text-emerald-500 uppercase tracking-widest ml-1">ContraseÃ±a</label>
                     <div className="relative group">
-                      <Lock className="absolute left-4 top-4 w-5 h-5 text-slate-300 group-focus-within:text-blue-600 transition-colors" />
+                      <Lock className="absolute left-4 top-4 w-5 h-5 text-slate-300 group-focus-within:text-emerald-600 transition-colors" />
                       <input 
                         type="password" 
                         name="password" 
                         required 
                         minLength={6} 
                         disabled={registerRateLimit.blocked}
-                        className="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:bg-white focus:border-blue-600 transition-all text-sm outline-none font-bold text-slate-900 placeholder:text-slate-200 disabled:opacity-50 disabled:cursor-not-allowed" 
-                        placeholder="Mínimo 6 caracteres" 
+                        className="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:bg-white focus:border-emerald-600 transition-all text-sm outline-none font-bold text-slate-900 placeholder:text-slate-200 disabled:opacity-50 disabled:cursor-not-allowed" 
+                        placeholder="MÃ­nimo 6 caracteres" 
                       />
                     </div>
                   </div>
@@ -333,15 +333,15 @@ function App() {
                   <button 
                     type="submit" 
                     disabled={registerRateLimit.blocked}
-                    className="w-full bg-blue-700 hover:bg-blue-800 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-blue-200 flex items-center justify-center gap-3 group active:scale-[0.98] uppercase tracking-widest text-xs mt-4"
+                    className="w-full bg-emerald-700 hover:bg-emerald-800 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-blue-200 flex items-center justify-center gap-3 group active:scale-[0.98] uppercase tracking-widest text-xs mt-4"
                   >
                     Crear mi cuenta
                     <UserPlus className="w-5 h-5 group-hover:scale-125 transition-transform" />
                   </button>
                 </form>
                 <div className="mt-10 text-center">
-                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">¿Ya eres parte? 
-                    <button onClick={() => setAuthMode('login')} className="text-blue-700 hover:text-blue-900 font-black ml-2 underline decoration-2 underline-offset-4">Inicia sesión</button>
+                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Â¿Ya eres parte? 
+                    <button onClick={() => setAuthMode('login')} className="text-blue-700 hover:text-blue-900 font-black ml-2 underline decoration-2 underline-offset-4">Inicia sesiÃ³n</button>
                   </p>
                 </div>
               </>
@@ -416,10 +416,10 @@ function App() {
           <div class="header">
             <div>
               <div class="school-name">${currentSchool.name}</div>
-              <div class="doc-type">Comprobante de Entrevista Académica</div>
+              <div class="doc-type">Comprobante de Entrevista AcadÃ©mica</div>
             </div>
             <div style="text-align: right">
-              <div class="label">Fecha de Emisión</div>
+              <div class="label">Fecha de EmisiÃ³n</div>
               <div class="value">${new Date().toLocaleDateString()}</div>
             </div>
           </div>
@@ -447,7 +447,7 @@ function App() {
 
           <div class="section">
             <div class="section-title">Temas Tratados y Acuerdos</div>
-            <div class="content">${r.temas || '<i>No se registraron temas para esta sesión.</i>'}</div>
+            <div class="content">${r.temas || '<i>No se registraron temas para esta sesiÃ³n.</i>'}</div>
           </div>
 
           <div class="section">
@@ -501,7 +501,7 @@ function App() {
       )}>
         <div className="p-8">
           <div className="flex items-center gap-3 mb-10">
-            <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-lg shadow-blue-900/20">
+            <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-lg shadow-blue-900/20">
               <CalendarCheck className="w-6 h-6" />
             </div>
             <div>
@@ -521,7 +521,7 @@ function App() {
                 className={cn(
                   "w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all group relative",
                   currentView === item.id 
-                    ? "bg-blue-600 text-white shadow-lg shadow-blue-900/40" 
+                    ? "bg-emerald-600 text-white shadow-lg shadow-blue-900/40" 
                     : "text-slate-400 hover:bg-white/5 hover:text-white"
                 )}
               >
@@ -549,7 +549,7 @@ function App() {
             className="w-full flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-white hover:bg-white/5 rounded-xl transition-all group font-bold text-[11px] uppercase tracking-wider"
           >
             <LogOut className="w-4 h-4" />
-            <span>Cerrar Sesión</span>
+            <span>Cerrar SesiÃ³n</span>
           </button>
         </div>
       </aside>
@@ -568,8 +568,8 @@ function App() {
               <div>
                 <h2 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider">{currentView.replace('-', ' ')}</h2>
                 <div className="flex items-center gap-2 mt-0.5">
-                  <p className="text-[9px] text-blue-600 dark:text-blue-400 font-bold uppercase tracking-widest">{currentDate}</p>
-                  <span className="text-[9px] text-slate-300 dark:text-slate-600">•</span>
+                  <p className="text-[9px] text-emerald-600 dark:text-blue-400 font-bold uppercase tracking-widest">{currentDate}</p>
+                  <span className="text-[9px] text-slate-300 dark:text-slate-600">â€¢</span>
                   <p className="text-[9px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest">{currentSchool.name}</p>
                 </div>
               </div>
@@ -581,7 +581,7 @@ function App() {
                 <p className="font-bold text-slate-900 dark:text-white text-xs">{currentUser.nombre}</p>
                 <p className="text-[9px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest">{currentUser.email}</p>
               </div>
-              <div className="w-10 h-10 rounded-xl bg-slate-900 dark:bg-blue-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-slate-200 dark:shadow-blue-900/50 transition-colors">
+              <div className="w-10 h-10 rounded-xl bg-slate-900 dark:bg-emerald-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-slate-200 dark:shadow-blue-900/50 transition-colors">
                 {currentUser.nombre.charAt(0).toUpperCase()}
               </div>
             </div>
@@ -604,8 +604,8 @@ function App() {
             </div>
             <div className="p-6">
               <textarea 
-                className="w-full h-40 p-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-medium text-sm"
-                placeholder="Escribe aquí los temas tratados, acuerdos y observaciones..."
+                className="w-full h-40 p-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-emerald-600 rounded-2xl outline-none transition-all font-medium text-sm"
+                placeholder="Escribe aquÃ­ los temas tratados, acuerdos y observaciones..."
                 value={temasEdit.texto}
                 onChange={(e) => setTemasEdit({...temasEdit, texto: e.target.value})}
               />
@@ -620,7 +620,7 @@ function App() {
                     }
                   }
                 }}
-                className="w-full mt-4 bg-blue-700 hover:bg-blue-800 text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-blue-100 uppercase tracking-widest text-xs"
+                className="w-full mt-4 bg-emerald-700 hover:bg-emerald-800 text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-blue-100 uppercase tracking-widest text-xs"
               >
                 Guardar cambios
               </button>
@@ -652,9 +652,9 @@ function Dashboard({ db, currentUser, showToast, onEditTemas, onPrint, updateRes
     .slice(0, 5);
 
   const stats = [
-    { label: 'Total Reservas', value: allActivities.length, icon: Calendar, color: 'text-blue-600', bg: 'bg-blue-50' },
+    { label: 'Total Reservas', value: allActivities.length, icon: Calendar, color: 'text-emerald-600', bg: 'bg-emerald-50' },
     { label: 'Docentes', value: db.docentes.length, icon: Users, color: 'text-emerald-600', bg: 'bg-emerald-50' },
-    { label: 'Próximas Citas', value: allActivities.filter(r => r.estado === 'reservado').length, icon: Clock, color: 'text-amber-600', bg: 'bg-amber-50' },
+    { label: 'PrÃ³ximas Citas', value: allActivities.filter(r => r.estado === 'reservado').length, icon: Clock, color: 'text-amber-600', bg: 'bg-amber-50' },
   ];
 
   return (
@@ -679,11 +679,11 @@ function Dashboard({ db, currentUser, showToast, onEditTemas, onPrint, updateRes
         <div className="p-6 border-b border-slate-200/60 flex items-center justify-between bg-slate-50/50">
           <div>
             <h3 className="text-sm font-black text-slate-900 tracking-tight uppercase">
-              {isDocente ? 'Mis próximas citas' : 'Próximas actividades'}
+              {isDocente ? 'Mis prÃ³ximas citas' : 'PrÃ³ximas actividades'}
             </h3>
-            <p className="text-[9px] text-blue-600 font-bold uppercase tracking-widest mt-0.5">Gestión en tiempo real</p>
+            <p className="text-[9px] text-emerald-600 font-bold uppercase tracking-widest mt-0.5">GestiÃ³n en tiempo real</p>
           </div>
-          <div className="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-blue-600 shadow-sm">
+          <div className="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-emerald-600 shadow-sm">
             <Calendar className="w-4 h-4" />
           </div>
         </div>
@@ -713,10 +713,10 @@ function Dashboard({ db, currentUser, showToast, onEditTemas, onPrint, updateRes
                     : (isAdmin ? `${docenteUser?.nombre} con ${apoderado?.nombre}` : docenteUser?.nombre);
 
                   return (
-                    <tr key={r.id} className="hover:bg-blue-50/30 transition-colors group">
+                    <tr key={r.id} className="hover:bg-emerald-50/30 transition-colors group">
                       <td className="px-6 py-5">
                         <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-slate-300 border border-slate-100 group-hover:bg-blue-600 group-hover:text-white transition-colors shadow-sm">
+                          <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-slate-300 border border-slate-100 group-hover:bg-emerald-600 group-hover:text-white transition-colors shadow-sm">
                             <User className="w-5 h-5" />
                           </div>
                           <div>
@@ -733,7 +733,7 @@ function Dashboard({ db, currentUser, showToast, onEditTemas, onPrint, updateRes
                             </div>
                             {(!isApoderado || r.estado === 'asistio') && r.temas && (
                               <div className="mt-2.5 bg-slate-50 border border-slate-100 rounded-lg p-2.5 text-[11px] text-slate-600 font-medium italic relative overflow-hidden">
-                                <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-blue-600"></div>
+                                <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-emerald-600"></div>
                                 <span className="font-black text-blue-900 not-italic uppercase tracking-tighter mr-2 text-[9px]">Temas:</span>
                                 {r.temas}
                               </div>
@@ -744,7 +744,7 @@ function Dashboard({ db, currentUser, showToast, onEditTemas, onPrint, updateRes
                       <td className="px-6 py-5">
                         <span className={cn(
                           "px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-wider inline-flex items-center justify-center min-w-[100px] border shadow-sm",
-                          r.estado === 'reservado' && "bg-blue-50 text-blue-700 border-blue-200",
+                          r.estado === 'reservado' && "bg-emerald-50 text-blue-700 border-blue-200",
                           r.estado === 'asistio' && "bg-emerald-50 text-emerald-700 border-emerald-200",
                           r.estado === 'no-asistio' && "bg-amber-50 text-amber-700 border-amber-200",
                           r.estado === 'cancelado' && "bg-rose-50 text-rose-700 border-rose-200"
@@ -758,7 +758,7 @@ function Dashboard({ db, currentUser, showToast, onEditTemas, onPrint, updateRes
                             <>
                               <button 
                                 onClick={() => onPrint(r.id)}
-                                className="p-2 text-slate-400 hover:text-blue-600 hover:bg-white rounded-lg transition-all border border-slate-100 bg-white shadow-sm"
+                                className="p-2 text-slate-400 hover:text-emerald-600 hover:bg-white rounded-lg transition-all border border-slate-100 bg-white shadow-sm"
                                 title="Ver documento"
                               >
                                 <Eye className="w-4 h-4" />
@@ -768,7 +768,7 @@ function Dashboard({ db, currentUser, showToast, onEditTemas, onPrint, updateRes
                           {isDocente && (
                             <button 
                               onClick={() => onEditTemas(r.id, r.temas || '')}
-                              className="p-2 text-slate-400 hover:text-blue-600 hover:bg-white rounded-lg transition-all border border-slate-100 bg-white shadow-sm"
+                              className="p-2 text-slate-400 hover:text-emerald-600 hover:bg-white rounded-lg transition-all border border-slate-100 bg-white shadow-sm"
                               title="Escribir temas"
                             >
                               <FileText className="w-4 h-4" />
@@ -782,7 +782,7 @@ function Dashboard({ db, currentUser, showToast, onEditTemas, onPrint, updateRes
                                   if (success) showToast('Asistencia marcada');
                                 }} 
                                 className="p-2 text-emerald-600 hover:text-white hover:bg-emerald-600 rounded-lg transition-all border border-emerald-200 bg-white shadow-sm"
-                                title="Asistió"
+                                title="AsistiÃ³"
                               >
                                 <CheckCircle className="w-4 h-4" />
                               </button>
@@ -792,7 +792,7 @@ function Dashboard({ db, currentUser, showToast, onEditTemas, onPrint, updateRes
                                   if (success) showToast('Inasistencia marcada');
                                 }} 
                                 className="p-2 text-amber-600 hover:text-white hover:bg-amber-600 rounded-lg transition-all border border-amber-200 bg-white shadow-sm"
-                                title="No asistió"
+                                title="No asistiÃ³"
                               >
                                 <XCircle className="w-4 h-4" />
                               </button>
@@ -800,7 +800,7 @@ function Dashboard({ db, currentUser, showToast, onEditTemas, onPrint, updateRes
                           )}
                           {r.estado === 'reservado' && (
                             <button onClick={async () => {
-                              if (!confirm('¿Seguro que desea cancelar esta reserva?')) return;
+                              if (!confirm('Â¿Seguro que desea cancelar esta reserva?')) return;
                               const success = await updateReserva({ ...r, estado: 'cancelado' as const });
                               if (success) {
                                 showToast('Reserva cancelada');
@@ -818,7 +818,7 @@ function Dashboard({ db, currentUser, showToast, onEditTemas, onPrint, updateRes
                                       r.hora
                                     );
                                   } catch (err) {
-                                    console.error('Error enviando correo de cancelación:', err);
+                                    console.error('Error enviando correo de cancelaciÃ³n:', err);
                                   }
                                 }
                               }
@@ -870,12 +870,12 @@ function Docentes({ db, addDocente, deleteDocente, showToast, currentUser }: { d
     <div className="space-y-6 fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tighter italic">Gestión de Docentes</h2>
-          <p className="text-[10px] text-blue-600 font-bold uppercase tracking-widest mt-1">Cuerpo académico del establecimiento</p>
+          <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tighter italic">GestiÃ³n de Docentes</h2>
+          <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-widest mt-1">Cuerpo acadÃ©mico del establecimiento</p>
         </div>
         <button 
           onClick={() => setIsModalOpen(true)}
-          className="bg-blue-700 hover:bg-blue-800 text-white font-black px-6 py-3 rounded-2xl transition-all shadow-xl shadow-blue-100 flex items-center gap-2 uppercase tracking-widest text-[10px]"
+          className="bg-emerald-700 hover:bg-emerald-800 text-white font-black px-6 py-3 rounded-2xl transition-all shadow-xl shadow-blue-100 flex items-center gap-2 uppercase tracking-widest text-[10px]"
         >
           <Plus className="w-4 h-4" />
           Nuevo Docente
@@ -890,7 +890,7 @@ function Docentes({ db, addDocente, deleteDocente, showToast, currentUser }: { d
               <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button 
                   onClick={async () => {
-                    if (confirm('¿Eliminar a este docente y todos sus horarios?')) {
+                    if (confirm('Â¿Eliminar a este docente y todos sus horarios?')) {
                       await deleteDocente(d.id);
                       showToast('Docente eliminado');
                     }
@@ -901,12 +901,12 @@ function Docentes({ db, addDocente, deleteDocente, showToast, currentUser }: { d
                 </button>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-black text-xl">
+                <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-black text-xl">
                   {user?.nombre.charAt(0).toUpperCase()}
                 </div>
                 <div>
                   <h4 className="font-black text-slate-900 tracking-tight">{user?.nombre}</h4>
-                  <p className="text-[10px] text-blue-600 font-bold uppercase tracking-widest">{d.especialidad}</p>
+                  <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-widest">{d.especialidad}</p>
                 </div>
               </div>
               <div className="mt-6 pt-6 border-t border-slate-50 flex items-center gap-4 text-slate-400">
@@ -926,20 +926,20 @@ function Docentes({ db, addDocente, deleteDocente, showToast, currentUser }: { d
             <h3 className="text-2xl font-black text-slate-900 mb-8 uppercase tracking-tighter italic">Registrar Docente</h3>
             <form onSubmit={handleAdd} className="space-y-6">
               <div className="space-y-2">
-                <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">Nombre Completo</label>
-                <input type="text" name="nombre" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
+                <label className="block text-[10px] font-black text-emerald-500 uppercase tracking-widest ml-1">Nombre Completo</label>
+                <input type="text" name="nombre" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-emerald-600 rounded-2xl outline-none transition-all font-bold text-sm" />
               </div>
               <div className="space-y-2">
-                <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">Correo Electrónico</label>
-                <input type="email" name="email" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
+                <label className="block text-[10px] font-black text-emerald-500 uppercase tracking-widest ml-1">Correo ElectrÃ³nico</label>
+                <input type="email" name="email" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-emerald-600 rounded-2xl outline-none transition-all font-bold text-sm" />
               </div>
               <div className="space-y-2">
-                <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">Especialidad / Asignatura</label>
-                <input type="text" name="especialidad" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" placeholder="Ej: Matemáticas, Psicopedagogía" />
+                <label className="block text-[10px] font-black text-emerald-500 uppercase tracking-widest ml-1">Especialidad / Asignatura</label>
+                <input type="text" name="especialidad" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-emerald-600 rounded-2xl outline-none transition-all font-bold text-sm" placeholder="Ej: MatemÃ¡ticas, PsicopedagogÃ­a" />
               </div>
               <div className="flex gap-3 pt-4">
                 <button type="button" onClick={() => setIsModalOpen(false)} className="flex-1 px-4 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-slate-600">Cancelar</button>
-                <button type="submit" className="flex-[2] bg-blue-700 hover:bg-blue-800 text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-blue-100 uppercase tracking-widest text-xs">Guardar Docente</button>
+                <button type="submit" className="flex-[2] bg-emerald-700 hover:bg-emerald-800 text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-blue-100 uppercase tracking-widest text-xs">Guardar Docente</button>
               </div>
             </form>
           </div>
@@ -1031,30 +1031,30 @@ function DisponibilidadView({ db, currentUser, showToast, addDisponibilidad, del
           <h3 className="text-xl font-black text-slate-900 mb-8 uppercase tracking-tighter italic">Definir Horario</h3>
           <form onSubmit={handleAdd} className="space-y-6">
             <div className="space-y-2">
-              <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">Fecha de Inicio</label>
-              <input type="date" name="fecha" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
+              <label className="block text-[10px] font-black text-emerald-500 uppercase tracking-widest ml-1">Fecha de Inicio</label>
+              <input type="date" name="fecha" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-emerald-600 rounded-2xl outline-none transition-all font-bold text-sm" />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">Inicio</label>
-                <input type="time" name="hora_inicio" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
+                <label className="block text-[10px] font-black text-emerald-500 uppercase tracking-widest ml-1">Inicio</label>
+                <input type="time" name="hora_inicio" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-emerald-600 rounded-2xl outline-none transition-all font-bold text-sm" />
               </div>
               <div className="space-y-2">
-                <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">Término</label>
-                <input type="time" name="hora_fin" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
+                <label className="block text-[10px] font-black text-emerald-500 uppercase tracking-widest ml-1">TÃ©rmino</label>
+                <input type="time" name="hora_fin" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-emerald-600 rounded-2xl outline-none transition-all font-bold text-sm" />
               </div>
             </div>
-            <div className="p-4 bg-blue-50 rounded-2xl space-y-4 border border-blue-100">
+            <div className="p-4 bg-emerald-50 rounded-2xl space-y-4 border border-blue-100">
               <label className="flex items-center gap-3 cursor-pointer group">
-                <input type="checkbox" name="repeat" className="w-5 h-5 rounded-lg border-2 border-blue-200 text-blue-600 focus:ring-blue-500 cursor-pointer" />
+                <input type="checkbox" name="repeat" className="w-5 h-5 rounded-lg border-2 border-blue-200 text-emerald-600 focus:ring-blue-500 cursor-pointer" />
                 <span className="text-[10px] font-black text-blue-900 uppercase tracking-widest group-hover:text-blue-700 transition-colors">Repetir semanalmente</span>
               </label>
               <div className="space-y-2">
-                <label className="block text-[9px] font-black text-blue-400 uppercase tracking-widest ml-1">Número de semanas</label>
-                <input type="number" name="weeks" min="1" max="12" defaultValue="1" className="w-full px-4 py-2 bg-white border-2 border-transparent focus:border-blue-600 rounded-xl outline-none transition-all font-bold text-sm" />
+                <label className="block text-[9px] font-black text-blue-400 uppercase tracking-widest ml-1">NÃºmero de semanas</label>
+                <input type="number" name="weeks" min="1" max="12" defaultValue="1" className="w-full px-4 py-2 bg-white border-2 border-transparent focus:border-emerald-600 rounded-xl outline-none transition-all font-bold text-sm" />
               </div>
             </div>
-            <button type="submit" className="w-full bg-blue-700 hover:bg-blue-800 text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-blue-100 uppercase tracking-widest text-xs">Publicar Disponibilidad</button>
+            <button type="submit" className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-blue-100 uppercase tracking-widest text-xs">Publicar Disponibilidad</button>
           </form>
         </div>
       </div>
@@ -1063,15 +1063,15 @@ function DisponibilidadView({ db, currentUser, showToast, addDisponibilidad, del
         <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden">
           <div className="p-8 border-b border-slate-50 flex items-center justify-between">
             <div>
-              <h3 className="text-xl font-black text-slate-900 uppercase tracking-tighter italic">Mi Agenda Pública</h3>
-              <p className="text-[10px] text-blue-600 font-bold uppercase tracking-widest mt-1">Horarios visibles para los apoderados</p>
+              <h3 className="text-xl font-black text-slate-900 uppercase tracking-tighter italic">Mi Agenda PÃºblica</h3>
+              <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-widest mt-1">Horarios visibles para los apoderados</p>
             </div>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="bg-slate-50/50">
                 <tr>
-                  <th className="px-8 py-4 text-left text-[9px] font-black text-slate-400 uppercase tracking-widest">Día y Fecha</th>
+                  <th className="px-8 py-4 text-left text-[9px] font-black text-slate-400 uppercase tracking-widest">DÃ­a y Fecha</th>
                   <th className="px-8 py-4 text-left text-[9px] font-black text-slate-400 uppercase tracking-widest">Rango Horario</th>
                   <th className="px-8 py-4 text-right text-[9px] font-black text-slate-400 uppercase tracking-widest">Acciones</th>
                 </tr>
@@ -1079,7 +1079,7 @@ function DisponibilidadView({ db, currentUser, showToast, addDisponibilidad, del
               <tbody className="divide-y divide-slate-50">
                 {currentDisp.length === 0 ? (
                   <tr>
-                    <td colSpan={3} className="px-8 py-16 text-center text-slate-400 italic text-xs font-bold uppercase tracking-widest">No has definido horarios aún</td>
+                    <td colSpan={3} className="px-8 py-16 text-center text-slate-400 italic text-xs font-bold uppercase tracking-widest">No has definido horarios aÃºn</td>
                   </tr>
                 ) : (
                   currentDisp
@@ -1092,7 +1092,7 @@ function DisponibilidadView({ db, currentUser, showToast, addDisponibilidad, del
                           </p>
                         </td>
                         <td className="px-8 py-5">
-                          <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-[10px] font-black uppercase tracking-widest">
+                          <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 text-blue-700 rounded-full text-[10px] font-black uppercase tracking-widest">
                             <Clock className="w-3 h-3" />
                             {d.hora_inicio} - {d.hora_fin}
                           </div>
@@ -1100,7 +1100,7 @@ function DisponibilidadView({ db, currentUser, showToast, addDisponibilidad, del
                         <td className="px-8 py-5 text-right">
                           <button 
                             onClick={async () => {
-                              if (confirm('¿Eliminar este bloque horario?')) {
+                              if (confirm('Â¿Eliminar este bloque horario?')) {
                                 await deleteDisponibilidad(d.id);
                                 showToast('Horario eliminado');
                               }
@@ -1133,16 +1133,16 @@ function Reservas({ db, currentUser, showToast, onEditTemas, onPrint, filterDoce
   const [selectedDocente, setSelectedDocente] = useState<number | ''>('');
   const [selectedEstado, setSelectedEstado] = useState('');
 
-  // Filtrado avanzado con memoización
+  // Filtrado avanzado con memoizaciÃ³n
   const filteredActivities = useMemo(() => {
     let filtered = db.reservas.filter(r => {
-      // Filtros básicos por rol
+      // Filtros bÃ¡sicos por rol
       if (filterDocente) return r.docente_id === filterDocente;
       if (filterApoderado) return r.apoderado_id === filterApoderado;
       return true;
     });
 
-    // Filtro de búsqueda en tiempo real
+    // Filtro de bÃºsqueda en tiempo real
     if (searchTerm) {
       const searchLower = searchTerm.toLowerCase();
       filtered = filtered.filter(r => {
@@ -1170,7 +1170,7 @@ function Reservas({ db, currentUser, showToast, onEditTemas, onPrint, filterDoce
       filtered = filtered.filter(r => new Date(r.fecha) <= new Date(dateTo));
     }
 
-    // Filtro por docente específico
+    // Filtro por docente especÃ­fico
     if (selectedDocente) {
       filtered = filtered.filter(r => r.docente_id === selectedDocente);
     }
@@ -1196,7 +1196,7 @@ function Reservas({ db, currentUser, showToast, onEditTemas, onPrint, filterDoce
     <div className="space-y-6 fade-in">
       <div>
         <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tighter italic">Historial de Entrevistas</h2>
-        <p className="text-[10px] text-blue-600 font-bold uppercase tracking-widest mt-1">Registro completo de actividades</p>
+        <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-widest mt-1">Registro completo de actividades</p>
       </div>
 
       <Suspense fallback={<div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-8 text-center"><div className="text-slate-400">Cargando filtros...</div></div>}>
@@ -1251,7 +1251,7 @@ function Reservas({ db, currentUser, showToast, onEditTemas, onPrint, filterDoce
                             {isDocente ? 'Apoderado' : docente?.especialidad}
                           </p>
                           {isAdmin && (
-                            <p className="text-[9px] text-blue-600 font-bold uppercase tracking-widest mt-1">
+                            <p className="text-[9px] text-emerald-600 font-bold uppercase tracking-widest mt-1">
                               Con: {apoderado?.nombre}
                             </p>
                           )}
@@ -1271,7 +1271,7 @@ function Reservas({ db, currentUser, showToast, onEditTemas, onPrint, filterDoce
                       <td className="px-8 py-5">
                         <span className={cn(
                           "px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-wider inline-flex items-center justify-center min-w-[100px] border shadow-sm",
-                          r.estado === 'reservado' && "bg-blue-50 text-blue-700 border-blue-200",
+                          r.estado === 'reservado' && "bg-emerald-50 text-blue-700 border-blue-200",
                           r.estado === 'asistio' && "bg-emerald-50 text-emerald-700 border-emerald-200",
                           r.estado === 'no-asistio' && "bg-amber-50 text-amber-700 border-amber-200",
                           r.estado === 'cancelado' && "bg-rose-50 text-rose-700 border-rose-200"
@@ -1283,21 +1283,21 @@ function Reservas({ db, currentUser, showToast, onEditTemas, onPrint, filterDoce
                         <div className="flex gap-2 justify-end">
                           <button 
                             onClick={() => onPrint(r.id)}
-                            className="p-2 text-slate-400 hover:text-blue-600 hover:bg-white rounded-xl transition-all border border-slate-100 bg-white"
+                            className="p-2 text-slate-400 hover:text-emerald-600 hover:bg-white rounded-xl transition-all border border-slate-100 bg-white"
                           >
                             <Printer className="w-4 h-4" />
                           </button>
                           {isDocente && (
                             <button 
                               onClick={() => onEditTemas(r.id, r.temas || '')}
-                              className="p-2 text-slate-400 hover:text-blue-600 hover:bg-white rounded-xl transition-all border border-slate-100 bg-white"
+                              className="p-2 text-slate-400 hover:text-emerald-600 hover:bg-white rounded-xl transition-all border border-slate-100 bg-white"
                             >
                               <FileText className="w-4 h-4" />
                             </button>
                           )}
                           {r.estado === 'reservado' && (
                             <button onClick={async () => {
-                              if (!confirm('¿Cancelar cita?')) return;
+                              if (!confirm('Â¿Cancelar cita?')) return;
                               const success = await updateReserva({...r, estado: 'cancelado' as const});
                               if (success) {
                                 showToast('Cita cancelada');
@@ -1315,7 +1315,7 @@ function Reservas({ db, currentUser, showToast, onEditTemas, onPrint, filterDoce
                                       r.hora
                                     );
                                   } catch (err) {
-                                    console.error('Error enviando correo de cancelación:', err);
+                                    console.error('Error enviando correo de cancelaciÃ³n:', err);
                                   }
                                 }
                               }
@@ -1363,7 +1363,7 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
       });
 
       if (success) {
-        showToast('¡Entrevista agendada con éxito!');
+        showToast('Â¡Entrevista agendada con Ã©xito!');
         setSelectedDocente(null);
         setCurrentView('mis-citas');
       }
@@ -1381,13 +1381,13 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
 
   return (
     <div className="space-y-8 fade-in">
-      <div className="bg-blue-700 p-10 rounded-[3rem] text-white relative overflow-hidden shadow-2xl shadow-blue-900/20">
+      <div className="bg-emerald-700 p-10 rounded-[3rem] text-white relative overflow-hidden shadow-2xl shadow-blue-900/20">
         <div className="absolute top-0 right-0 p-12 opacity-10">
           <Search className="w-32 h-32" />
         </div>
         <div className="relative z-10 max-w-xl">
           <h2 className="text-4xl font-black mb-4 uppercase tracking-tighter italic">Nueva Entrevista</h2>
-          <p className="text-blue-100 font-medium mb-8 leading-relaxed">Encuentra al docente o especialista y agenda una reunión en los horarios disponibles.</p>
+          <p className="text-blue-100 font-medium mb-8 leading-relaxed">Encuentra al docente o especialista y agenda una reuniÃ³n en los horarios disponibles.</p>
           <div className="relative">
             <Search className="absolute left-4 top-4 w-6 h-6 text-blue-300" />
             <input 
@@ -1413,17 +1413,17 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
                 className="w-full text-left p-6 bg-white rounded-[2.5rem] border border-slate-100 transition-all flex items-center justify-between group hover:border-blue-200 hover:shadow-xl hover:scale-[1.02] active:scale-95"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-black text-xl transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                  <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-black text-xl transition-colors group-hover:bg-emerald-600 group-hover:text-white">
                     {user?.nombre.charAt(0).toUpperCase()}
                   </div>
                   <div>
                     <h4 className="font-black text-slate-900 tracking-tight">{user?.nombre}</h4>
-                    <p className="text-[10px] font-bold text-blue-600 uppercase tracking-widest">
+                    <p className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">
                       {d.especialidad}
                     </p>
                   </div>
                 </div>
-                <ChevronRight className="w-6 h-6 text-slate-300 group-hover:text-blue-600 transition-transform group-hover:translate-x-1" />
+                <ChevronRight className="w-6 h-6 text-slate-300 group-hover:text-emerald-600 transition-transform group-hover:translate-x-1" />
               </button>
             );
           })}
@@ -1436,12 +1436,12 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
           <div className="bg-white rounded-[3rem] w-full max-w-2xl shadow-2xl overflow-hidden flex flex-col max-h-[85vh] animate-in zoom-in-95 duration-200">
             <div className="p-8 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-blue-600 text-white flex items-center justify-center font-black text-xl shadow-lg shadow-blue-200">
+                <div className="w-14 h-14 rounded-2xl bg-emerald-600 text-white flex items-center justify-center font-black text-xl shadow-lg shadow-blue-200">
                   {selectedDocenteUser?.nombre.charAt(0).toUpperCase()}
                 </div>
                 <div>
                   <h3 className="text-xl font-black text-slate-900 uppercase tracking-tighter italic">{selectedDocenteUser?.nombre}</h3>
-                  <p className="text-[10px] text-blue-600 font-bold uppercase tracking-widest">Agenda de Disponibilidad</p>
+                  <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-widest">Agenda de Disponibilidad</p>
                 </div>
               </div>
               <button 
@@ -1478,7 +1478,7 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
                       ) : (
                         <button 
                           onClick={() => handleReserve(disp)}
-                          className="px-7 py-2.5 bg-blue-700 hover:bg-blue-800 text-white rounded-xl text-[9px] font-black uppercase tracking-widest shadow-lg shadow-blue-100 transition-all active:scale-95 group-hover:scale-105"
+                          className="px-7 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-[9px] font-black uppercase tracking-widest shadow-lg shadow-blue-100 transition-all active:scale-95 group-hover:scale-105"
                         >
                           Agendar Cita
                         </button>
@@ -1536,12 +1536,12 @@ function Apoderados({ db, addApoderado, showToast, currentUser }: { db: DB, addA
     <div className="space-y-6 fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tighter italic">Gestión de Apoderados</h2>
-          <p className="text-[10px] text-blue-600 font-bold uppercase tracking-widest mt-1">Usuarios registrados en el sistema</p>
+          <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tighter italic">GestiÃ³n de Apoderados</h2>
+          <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-widest mt-1">Usuarios registrados en el sistema</p>
         </div>
         <button 
           onClick={() => setIsModalOpen(true)}
-          className="bg-blue-700 hover:bg-blue-800 text-white font-black px-6 py-3 rounded-2xl transition-all shadow-xl shadow-blue-100 flex items-center gap-2 uppercase tracking-widest text-[10px]"
+          className="bg-emerald-700 hover:bg-emerald-800 text-white font-black px-6 py-3 rounded-2xl transition-all shadow-xl shadow-blue-100 flex items-center gap-2 uppercase tracking-widest text-[10px]"
         >
           <Plus className="w-4 h-4" />
           Nuevo Apoderado
@@ -1552,12 +1552,12 @@ function Apoderados({ db, addApoderado, showToast, currentUser }: { db: DB, addA
         {db.usuarios.filter(u => u.rol === 'apoderado').map(apoderado => (
           <div key={apoderado.id} className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all group">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-black text-xl">
+              <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-black text-xl">
                 {apoderado.nombre.charAt(0).toUpperCase()}
               </div>
               <div>
                 <h4 className="font-black text-slate-900 tracking-tight">{apoderado.nombre}</h4>
-                <p className="text-[10px] text-blue-600 font-bold uppercase tracking-widest">{apoderado.email}</p>
+                <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-widest">{apoderado.email}</p>
               </div>
             </div>
           </div>
@@ -1570,16 +1570,16 @@ function Apoderados({ db, addApoderado, showToast, currentUser }: { db: DB, addA
             <h3 className="text-2xl font-black text-slate-900 mb-8 uppercase tracking-tighter italic">Registrar Apoderado</h3>
             <form onSubmit={handleAdd} className="space-y-6">
               <div className="space-y-2">
-                <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">Nombre Completo</label>
-                <input type="text" name="nombre" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
+                <label className="block text-[10px] font-black text-emerald-500 uppercase tracking-widest ml-1">Nombre Completo</label>
+                <input type="text" name="nombre" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-emerald-600 rounded-2xl outline-none transition-all font-bold text-sm" />
               </div>
               <div className="space-y-2">
-                <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">Correo Electrónico</label>
-                <input type="email" name="email" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
+                <label className="block text-[10px] font-black text-emerald-500 uppercase tracking-widest ml-1">Correo ElectrÃ³nico</label>
+                <input type="email" name="email" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-emerald-600 rounded-2xl outline-none transition-all font-bold text-sm" />
               </div>
               <div className="flex gap-3 pt-4">
                 <button type="button" onClick={() => setIsModalOpen(false)} className="flex-1 px-4 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-slate-600">Cancelar</button>
-                <button type="submit" className="flex-[2] bg-blue-700 hover:bg-blue-800 text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-blue-100 uppercase tracking-widest text-xs">Guardar Apoderado</button>
+                <button type="submit" className="flex-[2] bg-emerald-700 hover:bg-emerald-800 text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-blue-100 uppercase tracking-widest text-xs">Guardar Apoderado</button>
               </div>
             </form>
           </div>
@@ -1596,7 +1596,7 @@ function Toast({ show, message, type }: { show: boolean, message: string, type: 
       "fixed bottom-8 left-1/2 -translate-x-1/2 px-8 py-4 rounded-2xl shadow-2xl z-[100] flex items-center gap-3 fade-in border animate-bounce",
       type === 'success' && "bg-emerald-600 text-white border-emerald-500",
       type === 'error' && "bg-rose-600 text-white border-rose-500",
-      type === 'info' && "bg-blue-600 text-white border-blue-500"
+      type === 'info' && "bg-emerald-600 text-white border-blue-500"
     )}>
       {type === 'success' && <CheckCircle className="w-5 h-5" />}
       {type === 'error' && <XCircle className="w-5 h-5" />}
@@ -1606,3 +1606,4 @@ function Toast({ show, message, type }: { show: boolean, message: string, type: 
 }
 
 export default App;
+
