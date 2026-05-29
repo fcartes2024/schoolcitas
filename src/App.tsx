@@ -681,7 +681,7 @@ function Dashboard({ db, currentUser, showToast, onEditTemas, onPrint, updateRes
             <h3 className="text-sm font-black text-slate-900 tracking-tight uppercase">
               {isDocente ? 'Mis prÃ³ximas citas' : 'PrÃ³ximas actividades'}
             </h3>
-            <p className="text-[9px] text-blue-600 font-bold uppercase tracking-widest mt-0.5">GestiÃ³n en tiempo real</p>
+            <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">GestiÃ³n en tiempo real</p>
           </div>
           <div className="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-blue-600 shadow-sm">
             <Calendar className="w-4 h-4" />
