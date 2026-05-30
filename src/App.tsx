@@ -1421,6 +1421,9 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
                     <p className="text-[10px] font-bold text-blue-600 uppercase tracking-widest">
                       {d.especialidad}
                     </p>
+                    <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+                      {user?.nombre} • {d.especialidad}
+                    </p>
                   </div>
                 </div>
                 <ChevronRight className="w-6 h-6 text-slate-300 group-hover:text-blue-600 transition-transform group-hover:translate-x-1" />
