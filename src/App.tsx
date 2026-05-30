@@ -127,7 +127,7 @@ function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-900">
+      <div className="min-h-screen flex items-center justify-center bg-stone-900">
         <div className="text-white text-center">
           <div className="w-16 h-16 border-4 border-white/20 border-t-blue-500 rounded-full animate-spin mx-auto mb-4"></div>
           <p className="font-bold uppercase tracking-widest text-xs">Cargando conexiÃ³n...</p>
@@ -139,7 +139,7 @@ function App() {
   // STEP 1: School Selection
   if (!currentSchool) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-900 dark:bg-slate-950 p-4 relative overflow-hidden">
+      <div className="min-h-screen flex items-center justify-center bg-stone-900 dark:bg-stone-950 p-4 relative overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] w-[70%] h-[70%] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none animate-pulse"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[70%] h-[70%] bg-indigo-600/20 rounded-full blur-[120px] pointer-events-none animate-pulse"></div>
         
@@ -157,9 +157,9 @@ function App() {
               <button
                 key={school.id}
                 onClick={() => selectSchool(school)}
-                className="group bg-white/10 dark:bg-slate-800/50 backdrop-blur-xl border border-white/10 dark:border-slate-700/50 p-6 rounded-[2.5rem] hover:bg-white/20 dark:hover:bg-slate-700/50 transition-all text-center flex flex-col items-center gap-4 hover:scale-105 active:scale-95 shadow-2xl"
+                className="group bg-white/10 dark:bg-stone-800/50 backdrop-blur-xl border border-white/10 dark:border-stone-700/50 p-6 rounded-[2.5rem] hover:bg-white/20 dark:hover:bg-stone-700/50 transition-all text-center flex flex-col items-center gap-4 hover:scale-105 active:scale-95 shadow-2xl"
               >
-                <div className="w-20 h-20 rounded-3xl bg-white/10 dark:bg-slate-700 flex items-center justify-center text-white group-hover:bg-blue-600 dark:group-hover:bg-blue-600 group-hover:scale-110 transition-all overflow-hidden">
+                <div className="w-20 h-20 rounded-3xl bg-white/10 dark:bg-stone-700 flex items-center justify-center text-white group-hover:bg-blue-600 dark:group-hover:bg-blue-600 group-hover:scale-110 transition-all overflow-hidden">
                   {school.logo ? (
                     <img src={school.logo} alt={school.name} className="w-full h-full object-cover" />
                   ) : (
@@ -169,21 +169,21 @@ function App() {
                   )}
                 </div>
                 <div>
-                  <h3 className="text-white dark:text-slate-100 font-black text-sm uppercase tracking-tight">{school.name}</h3>
+                  <h3 className="text-white dark:text-stone-100 font-black text-sm uppercase tracking-tight">{school.name}</h3>
                   <p className="text-blue-300 dark:text-blue-400 text-[9px] font-bold uppercase tracking-widest mt-1">Conectar ahora</p>
                 </div>
-                <ChevronRight className="w-5 h-5 text-white/30 dark:text-slate-500 group-hover:text-white dark:group-hover:text-blue-400 transition-colors" />
+                <ChevronRight className="w-5 h-5 text-white/30 dark:text-stone-500 group-hover:text-white dark:group-hover:text-blue-400 transition-colors" />
               </button>
             ))}
           </div>
           
           {schools.length === 0 && (
-            <div className="text-center p-12 bg-white/5 dark:bg-slate-800/30 rounded-3xl border border-dashed border-white/10 dark:border-slate-700/30">
+            <div className="text-center p-12 bg-white/5 dark:bg-stone-800/30 rounded-3xl border border-dashed border-white/10 dark:border-stone-700/30">
               <p className="text-blue-200 dark:text-blue-300 text-xs font-bold uppercase tracking-widest">No se encontraron colegios configurados en la base maestra</p>
             </div>
           )}
           
-          <p className="text-center text-slate-500 dark:text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em] mt-12">
+          <p className="text-center text-stone-500 dark:text-stone-400 text-[10px] font-bold uppercase tracking-[0.2em] mt-12">
             Selecciona tu establecimiento para continuar
           </p>
         </div>
@@ -194,7 +194,7 @@ function App() {
   // STEP 2: Auth (Login/Register) for the selected school
   if (!currentUser) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-900 dark:bg-slate-950 p-4 relative overflow-hidden">
+      <div className="min-h-screen flex items-center justify-center bg-stone-900 dark:bg-stone-950 p-4 relative overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] w-[70%] h-[70%] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none animate-pulse"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[70%] h-[70%] bg-indigo-600/20 rounded-full blur-[120px] pointer-events-none animate-pulse"></div>
         
@@ -211,22 +211,22 @@ function App() {
             <p className="text-blue-100 font-bold uppercase tracking-[0.3em] text-[10px]">{currentSchool.name}</p>
           </div>
 
-          <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-[2.5rem] p-10 fade-in shadow-[0_20px_50px_rgba(0,0,0,0.5)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.8)] border border-white/20 dark:border-slate-800/50 transition-colors">
+          <div className="bg-white/95 dark:bg-stone-900/95 backdrop-blur-xl rounded-[2.5rem] p-10 fade-in shadow-[0_20px_50px_rgba(0,0,0,0.5)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.8)] border border-white/20 dark:border-stone-800/50 transition-colors">
             {authMode === 'login' ? (
               <>
-                <h2 className="text-3xl font-black mb-8 text-slate-900 dark:text-white tracking-tight uppercase text-center italic">Acceso</h2>
+                <h2 className="text-3xl font-black mb-8 text-stone-900 dark:text-white tracking-tight uppercase text-center italic">Acceso</h2>
                 <form onSubmit={handleLoginSubmit} className="space-y-6">
                   <div className="space-y-2">
                     <label className="block text-[10px] font-black text-blue-500 dark:text-blue-400 uppercase tracking-widest ml-1">Correo electrÃ³nico</label>
                     <div className="relative group">
-                      <Mail className="absolute left-4 top-4 w-5 h-5 text-slate-300 dark:text-slate-500 group-focus-within:text-blue-600 dark:group-focus-within:text-blue-400 transition-colors" />
+                      <Mail className="absolute left-4 top-4 w-5 h-5 text-stone-300 dark:text-stone-500 group-focus-within:text-blue-600 dark:group-focus-within:text-blue-400 transition-colors" />
                       <input 
                         type="email" 
                         name="email" 
                         required 
                         onChange={(e) => setAuthEmail(e.target.value)}
                         disabled={loginRateLimit.blocked}
-                        className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent dark:border-slate-700 rounded-2xl focus:bg-white dark:focus:bg-slate-700 focus:border-blue-600 dark:focus:border-blue-500 transition-all text-sm outline-none font-bold text-slate-900 dark:text-white placeholder:text-slate-200 dark:placeholder:text-slate-500 disabled:opacity-50 disabled:cursor-not-allowed" 
+                        className="w-full pl-12 pr-4 py-4 bg-stone-50 dark:bg-stone-800 border-2 border-transparent dark:border-stone-700 rounded-2xl focus:bg-white dark:focus:bg-stone-700 focus:border-blue-600 dark:focus:border-blue-500 transition-all text-sm outline-none font-bold text-stone-900 dark:text-white placeholder:text-stone-200 dark:placeholder:text-stone-500 disabled:opacity-50 disabled:cursor-not-allowed" 
                         placeholder="usuario@ejemplo.com" 
                       />
                     </div>
@@ -234,13 +234,13 @@ function App() {
                   <div className="space-y-2">
                     <label className="block text-[10px] font-black text-blue-500 dark:text-blue-400 uppercase tracking-widest ml-1">ContraseÃ±a</label>
                     <div className="relative group">
-                      <Lock className="absolute left-4 top-4 w-5 h-5 text-slate-300 dark:text-slate-500 group-focus-within:text-blue-600 dark:group-focus-within:text-blue-400 transition-colors" />
+                      <Lock className="absolute left-4 top-4 w-5 h-5 text-stone-300 dark:text-stone-500 group-focus-within:text-blue-600 dark:group-focus-within:text-blue-400 transition-colors" />
                       <input 
                         type="password" 
                         name="password" 
                         required 
                         disabled={loginRateLimit.blocked}
-                        className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent dark:border-slate-700 rounded-2xl focus:bg-white dark:focus:bg-slate-700 focus:border-blue-600 dark:focus:border-blue-500 transition-all text-sm outline-none font-bold text-slate-900 dark:text-white placeholder:text-slate-200 dark:placeholder:text-slate-500 disabled:opacity-50 disabled:cursor-not-allowed" 
+                        className="w-full pl-12 pr-4 py-4 bg-stone-50 dark:bg-stone-800 border-2 border-transparent dark:border-stone-700 rounded-2xl focus:bg-white dark:focus:bg-stone-700 focus:border-blue-600 dark:focus:border-blue-500 transition-all text-sm outline-none font-bold text-stone-900 dark:text-white placeholder:text-stone-200 dark:placeholder:text-stone-500 disabled:opacity-50 disabled:cursor-not-allowed" 
                         placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" 
                       />
                     </div>
@@ -259,32 +259,32 @@ function App() {
                   <button 
                     type="submit" 
                     disabled={loginRateLimit.blocked}
-                    className="w-full bg-blue-700 hover:bg-blue-800 disabled:bg-slate-300 dark:disabled:bg-slate-700 disabled:cursor-not-allowed text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-blue-200 dark:shadow-blue-900/30 flex items-center justify-center gap-3 group active:scale-[0.98] uppercase tracking-widest text-xs mt-4"
+                    className="w-full bg-blue-700 hover:bg-blue-800 disabled:bg-stone-300 dark:disabled:bg-stone-700 disabled:cursor-not-allowed text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-blue-200 dark:shadow-blue-900/30 flex items-center justify-center gap-3 group active:scale-[0.98] uppercase tracking-widest text-xs mt-4"
                   >
                     Entrar al portal
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
                   </button>
                 </form>
                 <div className="mt-10 text-center">
-                  <p className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest">Â¿Nuevo en la plataforma? 
+                  <p className="text-[10px] text-stone-400 dark:text-stone-500 font-bold uppercase tracking-widest">Â¿Nuevo en la plataforma? 
                     <button onClick={() => setAuthMode('register')} className="text-blue-700 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300 font-black ml-2 underline decoration-2 underline-offset-4">RegÃ­strate gratis</button>
                   </p>
                 </div>
               </>
             ) : (
               <>
-                <h2 className="text-3xl font-black mb-8 text-slate-900 tracking-tight uppercase text-center italic">Registro</h2>
+                <h2 className="text-3xl font-black mb-8 text-stone-900 tracking-tight uppercase text-center italic">Registro</h2>
                 <form onSubmit={handleRegisterSubmit} className="space-y-6">
                   <div className="space-y-2">
                     <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">Nombre completo</label>
                     <div className="relative group">
-                      <User className="absolute left-4 top-4 w-5 h-5 text-slate-300 group-focus-within:text-blue-600 transition-colors" />
+                      <User className="absolute left-4 top-4 w-5 h-5 text-stone-300 group-focus-within:text-blue-600 transition-colors" />
                       <input 
                         type="text" 
                         name="nombre" 
                         required 
                         disabled={registerRateLimit.blocked}
-                        className="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:bg-white focus:border-blue-600 transition-all text-sm outline-none font-bold text-slate-900 placeholder:text-slate-200 disabled:opacity-50 disabled:cursor-not-allowed" 
+                        className="w-full pl-12 pr-4 py-4 bg-stone-50 border-2 border-transparent rounded-2xl focus:bg-white focus:border-blue-600 transition-all text-sm outline-none font-bold text-stone-900 placeholder:text-stone-200 disabled:opacity-50 disabled:cursor-not-allowed" 
                         placeholder="Tu nombre" 
                       />
                     </div>
@@ -292,14 +292,14 @@ function App() {
                   <div className="space-y-2">
                     <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">Correo electrÃ³nico</label>
                     <div className="relative group">
-                      <Mail className="absolute left-4 top-4 w-5 h-5 text-slate-300 group-focus-within:text-blue-600 transition-colors" />
+                      <Mail className="absolute left-4 top-4 w-5 h-5 text-stone-300 group-focus-within:text-blue-600 transition-colors" />
                       <input 
                         type="email" 
                         name="email" 
                         required 
                         onChange={(e) => setAuthEmail(e.target.value)}
                         disabled={registerRateLimit.blocked}
-                        className="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:bg-white focus:border-blue-600 transition-all text-sm outline-none font-bold text-slate-900 placeholder:text-slate-200 disabled:opacity-50 disabled:cursor-not-allowed" 
+                        className="w-full pl-12 pr-4 py-4 bg-stone-50 border-2 border-transparent rounded-2xl focus:bg-white focus:border-blue-600 transition-all text-sm outline-none font-bold text-stone-900 placeholder:text-stone-200 disabled:opacity-50 disabled:cursor-not-allowed" 
                         placeholder="email@ejemplo.com" 
                       />
                     </div>
@@ -307,14 +307,14 @@ function App() {
                   <div className="space-y-2">
                     <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">ContraseÃ±a</label>
                     <div className="relative group">
-                      <Lock className="absolute left-4 top-4 w-5 h-5 text-slate-300 group-focus-within:text-blue-600 transition-colors" />
+                      <Lock className="absolute left-4 top-4 w-5 h-5 text-stone-300 group-focus-within:text-blue-600 transition-colors" />
                       <input 
                         type="password" 
                         name="password" 
                         required 
                         minLength={6} 
                         disabled={registerRateLimit.blocked}
-                        className="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:bg-white focus:border-blue-600 transition-all text-sm outline-none font-bold text-slate-900 placeholder:text-slate-200 disabled:opacity-50 disabled:cursor-not-allowed" 
+                        className="w-full pl-12 pr-4 py-4 bg-stone-50 border-2 border-transparent rounded-2xl focus:bg-white focus:border-blue-600 transition-all text-sm outline-none font-bold text-stone-900 placeholder:text-stone-200 disabled:opacity-50 disabled:cursor-not-allowed" 
                         placeholder="MÃ­nimo 6 caracteres" 
                       />
                     </div>
@@ -333,14 +333,14 @@ function App() {
                   <button 
                     type="submit" 
                     disabled={registerRateLimit.blocked}
-                    className="w-full bg-blue-700 hover:bg-blue-800 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-blue-200 flex items-center justify-center gap-3 group active:scale-[0.98] uppercase tracking-widest text-xs mt-4"
+                    className="w-full bg-blue-700 hover:bg-blue-800 disabled:bg-stone-300 disabled:cursor-not-allowed text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-blue-200 flex items-center justify-center gap-3 group active:scale-[0.98] uppercase tracking-widest text-xs mt-4"
                   >
                     Crear mi cuenta
                     <UserPlus className="w-5 h-5 group-hover:scale-125 transition-transform" />
                   </button>
                 </form>
                 <div className="mt-10 text-center">
-                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Â¿Ya eres parte? 
+                  <p className="text-[10px] text-stone-400 font-bold uppercase tracking-widest">Â¿Ya eres parte? 
                     <button onClick={() => setAuthMode('login')} className="text-blue-700 hover:text-blue-900 font-black ml-2 underline decoration-2 underline-offset-4">Inicia sesiÃ³n</button>
                   </p>
                 </div>
@@ -491,12 +491,12 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex relative overflow-hidden text-slate-700 font-sans">
+    <div className="min-h-screen bg-stone-50 flex relative overflow-hidden text-stone-700 font-sans">
       <div className="fixed top-[-15%] left-[-15%] w-[70%] h-[70%] bg-blue-100/30 rounded-full blur-[140px] pointer-events-none animate-pulse"></div>
       <div className="fixed bottom-[-15%] right-[-15%] w-[70%] h-[70%] bg-indigo-100/30 rounded-full blur-[140px] pointer-events-none animate-pulse"></div>
 
       <aside className={cn(
-        "fixed left-0 top-0 h-full w-64 bg-slate-900 shadow-2xl shadow-slate-900/20 transform transition-transform duration-300 z-40 md:translate-x-0",
+        "fixed left-0 top-0 h-full w-64 bg-stone-900 shadow-2xl shadow-stone-900/20 transform transition-transform duration-300 z-40 md:translate-x-0",
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
       )}>
         <div className="p-8">
@@ -522,7 +522,7 @@ function App() {
                   "w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all group relative",
                   currentView === item.id 
                     ? "bg-blue-600 text-white shadow-lg shadow-blue-900/40" 
-                    : "text-slate-400 hover:bg-white/5 hover:text-white"
+                    : "text-stone-400 hover:bg-white/5 hover:text-white"
                 )}
               >
                 <item.icon className={cn(
@@ -539,14 +539,14 @@ function App() {
         <div className="absolute bottom-8 left-8 right-8 space-y-2">
           <button 
             onClick={clearSchool} 
-            className="w-full flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-white hover:bg-white/5 rounded-xl transition-all group font-bold text-[11px] uppercase tracking-wider"
+            className="w-full flex items-center gap-3 px-4 py-3 text-stone-500 hover:text-white hover:bg-white/5 rounded-xl transition-all group font-bold text-[11px] uppercase tracking-wider"
           >
             <School className="w-4 h-4" />
             <span>Cambiar Colegio</span>
           </button>
           <button 
             onClick={logout} 
-            className="w-full flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-white hover:bg-white/5 rounded-xl transition-all group font-bold text-[11px] uppercase tracking-wider"
+            className="w-full flex items-center gap-3 px-4 py-3 text-stone-500 hover:text-white hover:bg-white/5 rounded-xl transition-all group font-bold text-[11px] uppercase tracking-wider"
           >
             <LogOut className="w-4 h-4" />
             <span>Cerrar SesiÃ³n</span>
@@ -555,22 +555,22 @@ function App() {
       </aside>
 
       {isSidebarOpen && (
-        <div onClick={() => setIsSidebarOpen(false)} className="fixed inset-0 bg-slate-900/40 backdrop-blur-[2px] z-30 md:hidden"></div>
+        <div onClick={() => setIsSidebarOpen(false)} className="fixed inset-0 bg-stone-900/40 backdrop-blur-[2px] z-30 md:hidden"></div>
       )}
 
       <main className="flex-1 md:ml-64 min-h-screen relative z-10">
-        <header className="bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border-b border-slate-200/60 dark:border-slate-700/60 sticky top-0 z-20 transition-colors">
+        <header className="bg-white/70 dark:bg-stone-900/70 backdrop-blur-xl border-b border-stone-200/60 dark:border-stone-700/60 sticky top-0 z-20 transition-colors">
           <div className="flex items-center justify-between px-8 py-4">
             <div className="flex items-center gap-4">
-              <button onClick={() => setIsSidebarOpen(true)} className="md:hidden p-2 text-slate-600 dark:text-slate-400">
+              <button onClick={() => setIsSidebarOpen(true)} className="md:hidden p-2 text-stone-600 dark:text-stone-400">
                 <Menu className="w-5 h-5" />
               </button>
               <div>
-                <h2 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider">{currentView.replace('-', ' ')}</h2>
+                <h2 className="text-sm font-black text-stone-900 dark:text-white uppercase tracking-wider">{currentView.replace('-', ' ')}</h2>
                 <div className="flex items-center gap-2 mt-0.5">
                   <p className="text-[9px] text-blue-600 dark:text-blue-400 font-bold uppercase tracking-widest">{currentDate}</p>
-                  <span className="text-[9px] text-slate-300 dark:text-slate-600">â€¢</span>
-                  <p className="text-[9px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest">{currentSchool.name}</p>
+                  <span className="text-[9px] text-stone-300 dark:text-stone-600">â€¢</span>
+                  <p className="text-[9px] text-stone-400 dark:text-stone-500 font-bold uppercase tracking-widest">{currentSchool.name}</p>
                 </div>
               </div>
             </div>
@@ -578,10 +578,10 @@ function App() {
             <div className="flex items-center gap-4">
               <ThemeToggle />
               <div className="text-right hidden sm:block">
-                <p className="font-bold text-slate-900 dark:text-white text-xs">{currentUser.nombre}</p>
-                <p className="text-[9px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest">{currentUser.email}</p>
+                <p className="font-bold text-stone-900 dark:text-white text-xs">{currentUser.nombre}</p>
+                <p className="text-[9px] text-stone-400 dark:text-stone-500 font-bold uppercase tracking-widest">{currentUser.email}</p>
               </div>
-              <div className="w-10 h-10 rounded-xl bg-slate-900 dark:bg-blue-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-slate-200 dark:shadow-blue-900/50 transition-colors">
+              <div className="w-10 h-10 rounded-xl bg-stone-900 dark:bg-blue-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-stone-200 dark:shadow-blue-900/50 transition-colors">
                 {currentUser.nombre.charAt(0).toUpperCase()}
               </div>
             </div>
@@ -594,17 +594,17 @@ function App() {
       </main>
 
       {temasEdit && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl w-full max-w-lg shadow-2xl">
-            <div className="p-6 border-b border-slate-100 flex items-center justify-between">
-              <h3 className="font-black text-slate-900 uppercase tracking-tighter">Temas de la Entrevista</h3>
-              <button onClick={() => setTemasEdit(null)} className="text-slate-400 hover:text-slate-600">
+            <div className="p-6 border-b border-stone-100 flex items-center justify-between">
+              <h3 className="font-black text-stone-900 uppercase tracking-tighter">Temas de la Entrevista</h3>
+              <button onClick={() => setTemasEdit(null)} className="text-stone-400 hover:text-stone-600">
                 <XCircle className="w-6 h-6" />
               </button>
             </div>
             <div className="p-6">
               <textarea 
-                className="w-full h-40 p-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-medium text-sm"
+                className="w-full h-40 p-4 bg-stone-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-medium text-sm"
                 placeholder="Escribe aquÃ­ los temas tratados, acuerdos y observaciones..."
                 value={temasEdit.texto}
                 onChange={(e) => setTemasEdit({...temasEdit, texto: e.target.value})}
@@ -667,23 +667,23 @@ function Dashboard({ db, currentUser, showToast, onEditTemas, onPrint, updateRes
                 <stat.icon className="w-6 h-6" />
               </div>
               <div>
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{stat.label}</p>
-                <p className="text-2xl font-black text-slate-900 tracking-tight">{stat.value}</p>
+                <p className="text-[10px] font-black text-stone-400 uppercase tracking-widest">{stat.label}</p>
+                <p className="text-2xl font-black text-stone-900 tracking-tight">{stat.value}</p>
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="glass-effect rounded-2xl overflow-hidden border border-slate-200/60 shadow-sm">
-        <div className="p-6 border-b border-slate-200/60 flex items-center justify-between bg-slate-50/50">
+      <div className="glass-effect rounded-2xl overflow-hidden border border-stone-200/60 shadow-sm">
+        <div className="p-6 border-b border-stone-200/60 flex items-center justify-between bg-stone-50/50">
           <div>
-            <h3 className="text-sm font-black text-slate-900 tracking-tight uppercase">
+            <h3 className="text-sm font-black text-stone-900 tracking-tight uppercase">
               {isDocente ? 'Mis prÃ³ximas citas' : 'PrÃ³ximas actividades'}
             </h3>
-            <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">GestiÃ³n en tiempo real</p>
+            <p className="text-[9px] text-stone-400 font-bold uppercase tracking-widest mt-0.5">GestiÃ³n en tiempo real</p>
           </div>
-          <div className="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-400 shadow-sm">
+          <div className="w-8 h-8 rounded-lg bg-white border border-stone-200 flex items-center justify-center text-stone-400 shadow-sm">
             <Calendar className="w-4 h-4" />
           </div>
         </div>
@@ -691,16 +691,16 @@ function Dashboard({ db, currentUser, showToast, onEditTemas, onPrint, updateRes
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="bg-slate-50/50">
-                <th className="px-6 py-4 text-left text-[9px] font-black text-slate-400 uppercase tracking-widest">Detalles</th>
-                <th className="px-6 py-4 text-left text-[9px] font-black text-slate-400 uppercase tracking-widest">Estado</th>
-                <th className="px-6 py-4 text-right text-[9px] font-black text-slate-400 uppercase tracking-widest">Acciones</th>
+              <tr className="bg-stone-50/50">
+                <th className="px-6 py-4 text-left text-[9px] font-black text-stone-400 uppercase tracking-widest">Detalles</th>
+                <th className="px-6 py-4 text-left text-[9px] font-black text-stone-400 uppercase tracking-widest">Estado</th>
+                <th className="px-6 py-4 text-right text-[9px] font-black text-stone-400 uppercase tracking-widest">Acciones</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-stone-100">
               {activities.length === 0 ? (
                 <tr>
-                  <td colSpan={3} className="text-slate-400 text-center py-16 italic text-xs font-bold uppercase tracking-widest">No hay actividades recientes</td>
+                  <td colSpan={3} className="text-stone-400 text-center py-16 italic text-xs font-bold uppercase tracking-widest">No hay actividades recientes</td>
                 </tr>
               ) : (
                 activities.map(r => {
@@ -713,28 +713,28 @@ function Dashboard({ db, currentUser, showToast, onEditTemas, onPrint, updateRes
                     : (isAdmin ? `${docenteUser?.nombre} con ${apoderado?.nombre}` : docenteUser?.nombre);
 
                   return (
-                    <tr key={r.id} className="hover:bg-slate-50/30 transition-colors group">
+                    <tr key={r.id} className="hover:bg-stone-50/30 transition-colors group">
                       <td className="px-6 py-5">
                         <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-slate-300 border border-slate-100 group-hover:bg-slate-300 group-hover:text-slate-600 transition-colors shadow-sm">
+                          <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-stone-300 border border-stone-100 group-hover:bg-stone-300 group-hover:text-stone-600 transition-colors shadow-sm">
                             <User className="w-5 h-5" />
                           </div>
                           <div>
-                            <p className="font-black text-slate-900 text-sm tracking-tight">{otherName}</p>
+                            <p className="font-black text-stone-900 text-sm tracking-tight">{otherName}</p>
                             <div className="flex items-center gap-3 mt-1">
-                              <p className="text-[9px] text-slate-500 font-black uppercase tracking-widest flex items-center gap-1.5">
+                              <p className="text-[9px] text-stone-500 font-black uppercase tracking-widest flex items-center gap-1.5">
                                 <Clock className="w-3 h-3" />
                                 {r.hora}
                               </p>
-                              <p className="text-[9px] text-slate-400 font-black uppercase tracking-widest flex items-center gap-1.5">
+                              <p className="text-[9px] text-stone-400 font-black uppercase tracking-widest flex items-center gap-1.5">
                                 <Calendar className="w-3 h-3" />
                                 {new Date(r.fecha + 'T00:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })}
                               </p>
                             </div>
                             {(!isApoderado || r.estado === 'asistio') && r.temas && (
-                              <div className="mt-2.5 bg-slate-50 border border-slate-100 rounded-lg p-2.5 text-[11px] text-slate-600 font-medium italic relative overflow-hidden">
-                                <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-slate-400"></div>
-                                <span className="font-black text-slate-600 not-italic uppercase tracking-tighter mr-2 text-[9px]">Temas:</span>
+                              <div className="mt-2.5 bg-stone-50 border border-stone-100 rounded-lg p-2.5 text-[11px] text-stone-600 font-medium italic relative overflow-hidden">
+                                <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-stone-400"></div>
+                                <span className="font-black text-stone-600 not-italic uppercase tracking-tighter mr-2 text-[9px]">Temas:</span>
                                 {r.temas}
                               </div>
                             )}
@@ -758,7 +758,7 @@ function Dashboard({ db, currentUser, showToast, onEditTemas, onPrint, updateRes
                             <>
                               <button 
                                 onClick={() => onPrint(r.id)}
-                                className="p-2 text-slate-400 hover:text-blue-600 hover:bg-white rounded-lg transition-all border border-slate-100 bg-white shadow-sm"
+                                className="p-2 text-stone-400 hover:text-blue-600 hover:bg-white rounded-lg transition-all border border-stone-100 bg-white shadow-sm"
                                 title="Ver documento"
                               >
                                 <Eye className="w-4 h-4" />
@@ -768,7 +768,7 @@ function Dashboard({ db, currentUser, showToast, onEditTemas, onPrint, updateRes
                           {isDocente && (
                             <button 
                               onClick={() => onEditTemas(r.id, r.temas || '')}
-                              className="p-2 text-slate-400 hover:text-blue-600 hover:bg-white rounded-lg transition-all border border-slate-100 bg-white shadow-sm"
+                              className="p-2 text-stone-400 hover:text-blue-600 hover:bg-white rounded-lg transition-all border border-stone-100 bg-white shadow-sm"
                               title="Escribir temas"
                             >
                               <FileText className="w-4 h-4" />
@@ -870,7 +870,7 @@ function Docentes({ db, addDocente, deleteDocente, showToast, currentUser }: { d
     <div className="space-y-6 fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tighter italic">GestiÃ³n de Docentes</h2>
+          <h2 className="text-2xl font-black text-stone-900 uppercase tracking-tighter italic">GestiÃ³n de Docentes</h2>
           <p className="text-[10px] text-blue-600 font-bold uppercase tracking-widest mt-1">Cuerpo acadÃ©mico del establecimiento</p>
         </div>
         <button 
@@ -886,7 +886,7 @@ function Docentes({ db, addDocente, deleteDocente, showToast, currentUser }: { d
         {db.docentes.map(d => {
           const user = db.usuarios.find(u => u.id === d.usuario_id);
           return (
-            <div key={d.id} className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all group relative overflow-hidden">
+            <div key={d.id} className="bg-white p-6 rounded-[2rem] border border-stone-100 shadow-sm hover:shadow-xl transition-all group relative overflow-hidden">
               <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button 
                   onClick={async () => {
@@ -905,11 +905,11 @@ function Docentes({ db, addDocente, deleteDocente, showToast, currentUser }: { d
                   {user?.nombre.charAt(0).toUpperCase()}
                 </div>
                 <div>
-                  <h4 className="font-black text-slate-900 tracking-tight">{user?.nombre}</h4>
+                  <h4 className="font-black text-stone-900 tracking-tight">{user?.nombre}</h4>
                   <p className="text-[10px] text-blue-600 font-bold uppercase tracking-widest">{d.especialidad}</p>
                 </div>
               </div>
-              <div className="mt-6 pt-6 border-t border-slate-50 flex items-center gap-4 text-slate-400">
+              <div className="mt-6 pt-6 border-t border-stone-50 flex items-center gap-4 text-stone-400">
                 <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest">
                   <Mail className="w-3.5 h-3.5" />
                   {user?.email}
@@ -921,24 +921,24 @@ function Docentes({ db, addDocente, deleteDocente, showToast, currentUser }: { d
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-[2.5rem] w-full max-w-md shadow-2xl p-10">
-            <h3 className="text-2xl font-black text-slate-900 mb-8 uppercase tracking-tighter italic">Registrar Docente</h3>
+            <h3 className="text-2xl font-black text-stone-900 mb-8 uppercase tracking-tighter italic">Registrar Docente</h3>
             <form onSubmit={handleAdd} className="space-y-6">
               <div className="space-y-2">
                 <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">Nombre Completo</label>
-                <input type="text" name="nombre" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
+                <input type="text" name="nombre" required className="w-full px-4 py-4 bg-stone-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
               </div>
               <div className="space-y-2">
                 <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">Correo ElectrÃ³nico</label>
-                <input type="email" name="email" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
+                <input type="email" name="email" required className="w-full px-4 py-4 bg-stone-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
               </div>
               <div className="space-y-2">
                 <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">Especialidad / Asignatura</label>
-                <input type="text" name="especialidad" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" placeholder="Ej: MatemÃ¡ticas, PsicopedagogÃ­a" />
+                <input type="text" name="especialidad" required className="w-full px-4 py-4 bg-stone-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" placeholder="Ej: MatemÃ¡ticas, PsicopedagogÃ­a" />
               </div>
               <div className="flex gap-3 pt-4">
-                <button type="button" onClick={() => setIsModalOpen(false)} className="flex-1 px-4 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-slate-600">Cancelar</button>
+                <button type="button" onClick={() => setIsModalOpen(false)} className="flex-1 px-4 py-4 text-[10px] font-black uppercase tracking-widest text-stone-400 hover:text-stone-600">Cancelar</button>
                 <button type="submit" className="flex-[2] bg-blue-700 hover:bg-blue-800 text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-blue-100 uppercase tracking-widest text-xs">Guardar Docente</button>
               </div>
             </form>
@@ -1027,21 +1027,21 @@ function DisponibilidadView({ db, currentUser, showToast, addDisponibilidad, del
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 fade-in">
       <div className="lg:col-span-1">
-        <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm sticky top-24">
-          <h3 className="text-xl font-black text-slate-900 mb-8 uppercase tracking-tighter italic">Definir Horario</h3>
+        <div className="bg-white p-8 rounded-[2.5rem] border border-stone-100 shadow-sm sticky top-24">
+          <h3 className="text-xl font-black text-stone-900 mb-8 uppercase tracking-tighter italic">Definir Horario</h3>
           <form onSubmit={handleAdd} className="space-y-6">
             <div className="space-y-2">
               <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">Fecha de Inicio</label>
-              <input type="date" name="fecha" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
+              <input type="date" name="fecha" required className="w-full px-4 py-4 bg-stone-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">Inicio</label>
-                <input type="time" name="hora_inicio" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
+                <input type="time" name="hora_inicio" required className="w-full px-4 py-4 bg-stone-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
               </div>
               <div className="space-y-2">
                 <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">TÃ©rmino</label>
-                <input type="time" name="hora_fin" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
+                <input type="time" name="hora_fin" required className="w-full px-4 py-4 bg-stone-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
               </div>
             </div>
             <div className="p-4 bg-blue-50 rounded-2xl space-y-4 border border-blue-100">
@@ -1060,34 +1060,34 @@ function DisponibilidadView({ db, currentUser, showToast, addDisponibilidad, del
       </div>
 
       <div className="lg:col-span-2">
-        <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden">
-          <div className="p-8 border-b border-slate-50 flex items-center justify-between">
+        <div className="bg-white rounded-[2.5rem] border border-stone-100 shadow-sm overflow-hidden">
+          <div className="p-8 border-b border-stone-50 flex items-center justify-between">
             <div>
-              <h3 className="text-xl font-black text-slate-900 uppercase tracking-tighter italic">Mi Agenda PÃºblica</h3>
+              <h3 className="text-xl font-black text-stone-900 uppercase tracking-tighter italic">Mi Agenda PÃºblica</h3>
               <p className="text-[10px] text-blue-600 font-bold uppercase tracking-widest mt-1">Horarios visibles para los apoderados</p>
             </div>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-slate-50/50">
+              <thead className="bg-stone-50/50">
                 <tr>
-                  <th className="px-8 py-4 text-left text-[9px] font-black text-slate-400 uppercase tracking-widest">DÃ­a y Fecha</th>
-                  <th className="px-8 py-4 text-left text-[9px] font-black text-slate-400 uppercase tracking-widest">Rango Horario</th>
-                  <th className="px-8 py-4 text-right text-[9px] font-black text-slate-400 uppercase tracking-widest">Acciones</th>
+                  <th className="px-8 py-4 text-left text-[9px] font-black text-stone-400 uppercase tracking-widest">DÃ­a y Fecha</th>
+                  <th className="px-8 py-4 text-left text-[9px] font-black text-stone-400 uppercase tracking-widest">Rango Horario</th>
+                  <th className="px-8 py-4 text-right text-[9px] font-black text-stone-400 uppercase tracking-widest">Acciones</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-50">
+              <tbody className="divide-y divide-stone-50">
                 {currentDisp.length === 0 ? (
                   <tr>
-                    <td colSpan={3} className="px-8 py-16 text-center text-slate-400 italic text-xs font-bold uppercase tracking-widest">No has definido horarios aÃºn</td>
+                    <td colSpan={3} className="px-8 py-16 text-center text-stone-400 italic text-xs font-bold uppercase tracking-widest">No has definido horarios aÃºn</td>
                   </tr>
                 ) : (
                   currentDisp
                     .sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime())
                     .map(d => (
-                      <tr key={d.id} className="hover:bg-slate-50 transition-colors group">
+                      <tr key={d.id} className="hover:bg-stone-50 transition-colors group">
                         <td className="px-8 py-5">
-                          <p className="font-black text-slate-900 text-sm tracking-tight">
+                          <p className="font-black text-stone-900 text-sm tracking-tight">
                             {new Date(d.fecha + 'T00:00:00').toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' })}
                           </p>
                         </td>
@@ -1195,11 +1195,11 @@ function Reservas({ db, currentUser, showToast, onEditTemas, onPrint, filterDoce
   return (
     <div className="space-y-6 fade-in">
       <div>
-        <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tighter italic">Historial de Entrevistas</h2>
+        <h2 className="text-2xl font-black text-stone-900 uppercase tracking-tighter italic">Historial de Entrevistas</h2>
         <p className="text-[10px] text-blue-600 font-bold uppercase tracking-widest mt-1">Registro completo de actividades</p>
       </div>
 
-      <Suspense fallback={<div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-8 text-center"><div className="text-slate-400">Cargando filtros...</div></div>}>
+      <Suspense fallback={<div className="bg-white rounded-[2.5rem] border border-stone-100 shadow-sm p-8 text-center"><div className="text-stone-400">Cargando filtros...</div></div>}>
         <AdvancedFilters
           searchTerm={searchTerm}
           onSearchChange={setSearchTerm}
@@ -1218,21 +1218,21 @@ function Reservas({ db, currentUser, showToast, onEditTemas, onPrint, filterDoce
         />
       </Suspense>
 
-      <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-[2.5rem] border border-stone-100 shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-slate-50/50">
+            <thead className="bg-stone-50/50">
               <tr>
-                <th className="px-8 py-4 text-left text-[9px] font-black text-slate-400 uppercase tracking-widest">Participantes</th>
-                <th className="px-8 py-4 text-left text-[9px] font-black text-slate-400 uppercase tracking-widest">Fecha y Hora</th>
-                <th className="px-8 py-4 text-left text-[9px] font-black text-slate-400 uppercase tracking-widest">Estado</th>
-                <th className="px-8 py-4 text-right text-[9px] font-black text-slate-400 uppercase tracking-widest">Acciones</th>
+                <th className="px-8 py-4 text-left text-[9px] font-black text-stone-400 uppercase tracking-widest">Participantes</th>
+                <th className="px-8 py-4 text-left text-[9px] font-black text-stone-400 uppercase tracking-widest">Fecha y Hora</th>
+                <th className="px-8 py-4 text-left text-[9px] font-black text-stone-400 uppercase tracking-widest">Estado</th>
+                <th className="px-8 py-4 text-right text-[9px] font-black text-stone-400 uppercase tracking-widest">Acciones</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-50">
+            <tbody className="divide-y divide-stone-50">
               {filteredActivities.length === 0 ? (
                 <tr>
-                  <td colSpan={4} className="px-8 py-16 text-center text-slate-400 italic text-xs font-bold uppercase tracking-widest">No se encontraron registros</td>
+                  <td colSpan={4} className="px-8 py-16 text-center text-stone-400 italic text-xs font-bold uppercase tracking-widest">No se encontraron registros</td>
                 </tr>
               ) : (
                 filteredActivities.map(r => {
@@ -1241,13 +1241,13 @@ function Reservas({ db, currentUser, showToast, onEditTemas, onPrint, filterDoce
                   const apoderado = db.usuarios.find(u => u.id === r.apoderado_id);
 
                   return (
-                    <tr key={r.id} className="hover:bg-slate-50/50 transition-colors">
+                    <tr key={r.id} className="hover:bg-stone-50/50 transition-colors">
                       <td className="px-8 py-5">
                         <div className="flex flex-col gap-1">
-                          <p className="text-sm font-black text-slate-900 tracking-tight">
+                          <p className="text-sm font-black text-stone-900 tracking-tight">
                             {isDocente ? apoderado?.nombre : docenteUser?.nombre}
                           </p>
-                          <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">
+                          <p className="text-[9px] text-stone-400 font-bold uppercase tracking-widest">
                             {isDocente ? 'Apoderado' : docente?.especialidad}
                           </p>
                           {isAdmin && (
@@ -1259,7 +1259,7 @@ function Reservas({ db, currentUser, showToast, onEditTemas, onPrint, filterDoce
                       </td>
                       <td className="px-8 py-5">
                         <div className="flex flex-col gap-1">
-                          <p className="text-sm font-bold text-slate-700">
+                          <p className="text-sm font-bold text-stone-700">
                             {new Date(r.fecha + 'T00:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}
                           </p>
                           <p className="text-[10px] font-black text-blue-700 uppercase tracking-widest flex items-center gap-1.5">
@@ -1283,14 +1283,14 @@ function Reservas({ db, currentUser, showToast, onEditTemas, onPrint, filterDoce
                         <div className="flex gap-2 justify-end">
                           <button 
                             onClick={() => onPrint(r.id)}
-                            className="p-2 text-slate-400 hover:text-blue-600 hover:bg-white rounded-xl transition-all border border-slate-100 bg-white"
+                            className="p-2 text-stone-400 hover:text-blue-600 hover:bg-white rounded-xl transition-all border border-stone-100 bg-white"
                           >
                             <Printer className="w-4 h-4" />
                           </button>
                           {isDocente && (
                             <button 
                               onClick={() => onEditTemas(r.id, r.temas || '')}
-                              className="p-2 text-slate-400 hover:text-blue-600 hover:bg-white rounded-xl transition-all border border-slate-100 bg-white"
+                              className="p-2 text-stone-400 hover:text-blue-600 hover:bg-white rounded-xl transition-all border border-stone-100 bg-white"
                             >
                               <FileText className="w-4 h-4" />
                             </button>
@@ -1393,7 +1393,7 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
             <input 
               type="text" 
               placeholder="Buscar por nombre o especialidad..." 
-              className="w-full pl-14 pr-6 py-5 bg-white/10 backdrop-blur-md border-2 border-white/20 rounded-2xl outline-none focus:bg-white focus:text-slate-900 focus:border-white transition-all font-bold"
+              className="w-full pl-14 pr-6 py-5 bg-white/10 backdrop-blur-md border-2 border-white/20 rounded-2xl outline-none focus:bg-white focus:text-stone-900 focus:border-white transition-all font-bold"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -1402,7 +1402,7 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
       </div>
 
       <div className="space-y-4">
-        <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">Docentes Disponibles</h3>
+        <h3 className="text-[10px] font-black text-stone-400 uppercase tracking-[0.2em] ml-2">Docentes Disponibles</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredDocentes.map(d => {
             const user = db.usuarios.find(u => u.id === d.usuario_id);
@@ -1410,23 +1410,23 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
               <button 
                 key={d.id} 
                 onClick={() => setSelectedDocente(d.id)}
-                className="w-full text-left p-6 bg-white rounded-[2.5rem] border border-slate-100 transition-all flex items-center justify-between group hover:border-blue-200 hover:shadow-xl hover:scale-[1.02] active:scale-95"
+                className="w-full text-left p-6 bg-white rounded-[2.5rem] border border-stone-100 transition-all flex items-center justify-between group hover:border-blue-200 hover:shadow-xl hover:scale-[1.02] active:scale-95"
               >
                 <div className="flex items-center gap-4">
                   <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-black text-xl transition-colors group-hover:bg-blue-600 group-hover:text-white">
                     {user?.nombre.charAt(0).toUpperCase()}
                   </div>
                   <div>
-                    <h4 className="font-black text-slate-900 tracking-tight">{user?.nombre}</h4>
+                    <h4 className="font-black text-stone-900 tracking-tight">{user?.nombre}</h4>
                     <p className="text-[10px] font-bold text-blue-600 uppercase tracking-widest">
                       {d.especialidad}
                     </p>
-                    <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+                    <p className="text-[10px] text-stone-400 font-bold uppercase tracking-widest">
                       {user?.nombre} • {d.especialidad}
                     </p>
                   </div>
                 </div>
-                <ChevronRight className="w-6 h-6 text-slate-300 group-hover:text-blue-600 transition-transform group-hover:translate-x-1" />
+                <ChevronRight className="w-6 h-6 text-stone-300 group-hover:text-blue-600 transition-transform group-hover:translate-x-1" />
               </button>
             );
           })}
@@ -1435,21 +1435,21 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
 
       {/* Modal de Horarios */}
       {selectedDocente && (
-        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[70] flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-stone-900/40 backdrop-blur-sm z-[70] flex items-center justify-center p-4">
           <div className="bg-white rounded-[3rem] w-full max-w-2xl shadow-2xl overflow-hidden flex flex-col max-h-[85vh] animate-in zoom-in-95 duration-200">
-            <div className="p-8 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+            <div className="p-8 border-b border-stone-100 flex items-center justify-between bg-stone-50/50">
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-2xl bg-blue-600 text-white flex items-center justify-center font-black text-xl shadow-lg shadow-blue-200">
                   {selectedDocenteUser?.nombre.charAt(0).toUpperCase()}
                 </div>
                 <div>
-                  <h3 className="text-xl font-black text-slate-900 uppercase tracking-tighter italic">{selectedDocenteUser?.nombre}</h3>
+                  <h3 className="text-xl font-black text-stone-900 uppercase tracking-tighter italic">{selectedDocenteUser?.nombre}</h3>
                   <p className="text-[10px] text-blue-600 font-bold uppercase tracking-widest">Agenda de Disponibilidad</p>
                 </div>
               </div>
               <button 
                 onClick={() => setSelectedDocente(null)} 
-                className="p-3 text-slate-400 hover:text-rose-500 hover:bg-rose-50 rounded-2xl transition-all"
+                className="p-3 text-stone-400 hover:text-rose-500 hover:bg-rose-50 rounded-2xl transition-all"
               >
                 <XCircle className="w-8 h-8" />
               </button>
@@ -1466,9 +1466,9 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
                   );
 
                   return (
-                    <div key={disp.id} className="bg-white p-6 rounded-[2rem] border border-slate-100 flex items-center justify-between hover:border-blue-200 transition-all group shadow-sm hover:shadow-md">
+                    <div key={disp.id} className="bg-white p-6 rounded-[2rem] border border-stone-100 flex items-center justify-between hover:border-blue-200 transition-all group shadow-sm hover:shadow-md">
                       <div>
-                        <p className="text-sm font-black text-slate-900 uppercase tracking-tighter">
+                        <p className="text-sm font-black text-stone-900 uppercase tracking-tighter">
                           {new Date(disp.fecha + 'T00:00:00').toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' })}
                         </p>
                         <p className="text-[10px] font-black text-blue-700 uppercase tracking-widest flex items-center gap-1.5 mt-1">
@@ -1477,7 +1477,7 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
                         </p>
                       </div>
                       {isReserved ? (
-                        <span className="px-5 py-2.5 bg-slate-50 text-slate-400 rounded-xl text-[9px] font-black uppercase tracking-widest border border-slate-100">Ocupado</span>
+                        <span className="px-5 py-2.5 bg-stone-50 text-stone-400 rounded-xl text-[9px] font-black uppercase tracking-widest border border-stone-100">Ocupado</span>
                       ) : (
                         <button 
                           onClick={() => handleReserve(disp)}
@@ -1491,16 +1491,16 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
                 })
               ) : (
                 <div className="py-16 text-center">
-                  <div className="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center text-slate-200 mx-auto mb-6">
+                  <div className="w-20 h-20 bg-stone-50 rounded-3xl flex items-center justify-center text-stone-200 mx-auto mb-6">
                     <Clock className="w-10 h-10" />
                   </div>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Este docente no tiene horarios disponibles</p>
+                  <p className="text-[10px] font-black text-stone-400 uppercase tracking-[0.2em]">Este docente no tiene horarios disponibles</p>
                 </div>
               )}
             </div>
             
-            <div className="p-6 bg-slate-50 border-t border-slate-100 text-center">
-              <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">Selecciona un bloque horario para confirmar la entrevista</p>
+            <div className="p-6 bg-stone-50 border-t border-stone-100 text-center">
+              <p className="text-[9px] text-stone-400 font-bold uppercase tracking-widest">Selecciona un bloque horario para confirmar la entrevista</p>
             </div>
           </div>
         </div>
@@ -1539,7 +1539,7 @@ function Apoderados({ db, addApoderado, showToast, currentUser }: { db: DB, addA
     <div className="space-y-6 fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tighter italic">GestiÃ³n de Apoderados</h2>
+          <h2 className="text-2xl font-black text-stone-900 uppercase tracking-tighter italic">GestiÃ³n de Apoderados</h2>
           <p className="text-[10px] text-blue-600 font-bold uppercase tracking-widest mt-1">Usuarios registrados en el sistema</p>
         </div>
         <button 
@@ -1553,13 +1553,13 @@ function Apoderados({ db, addApoderado, showToast, currentUser }: { db: DB, addA
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {db.usuarios.filter(u => u.rol === 'apoderado').map(apoderado => (
-          <div key={apoderado.id} className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all group">
+          <div key={apoderado.id} className="bg-white p-6 rounded-[2rem] border border-stone-100 shadow-sm hover:shadow-xl transition-all group">
             <div className="flex items-center gap-4">
               <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-black text-xl">
                 {apoderado.nombre.charAt(0).toUpperCase()}
               </div>
               <div>
-                <h4 className="font-black text-slate-900 tracking-tight">{apoderado.nombre}</h4>
+                <h4 className="font-black text-stone-900 tracking-tight">{apoderado.nombre}</h4>
                 <p className="text-[10px] text-blue-600 font-bold uppercase tracking-widest">{apoderado.email}</p>
               </div>
             </div>
@@ -1568,20 +1568,20 @@ function Apoderados({ db, addApoderado, showToast, currentUser }: { db: DB, addA
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-[2.5rem] w-full max-w-md shadow-2xl p-10">
-            <h3 className="text-2xl font-black text-slate-900 mb-8 uppercase tracking-tighter italic">Registrar Apoderado</h3>
+            <h3 className="text-2xl font-black text-stone-900 mb-8 uppercase tracking-tighter italic">Registrar Apoderado</h3>
             <form onSubmit={handleAdd} className="space-y-6">
               <div className="space-y-2">
                 <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">Nombre Completo</label>
-                <input type="text" name="nombre" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
+                <input type="text" name="nombre" required className="w-full px-4 py-4 bg-stone-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
               </div>
               <div className="space-y-2">
                 <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">Correo ElectrÃ³nico</label>
-                <input type="email" name="email" required className="w-full px-4 py-4 bg-slate-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
+                <input type="email" name="email" required className="w-full px-4 py-4 bg-stone-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
               </div>
               <div className="flex gap-3 pt-4">
-                <button type="button" onClick={() => setIsModalOpen(false)} className="flex-1 px-4 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-slate-600">Cancelar</button>
+                <button type="button" onClick={() => setIsModalOpen(false)} className="flex-1 px-4 py-4 text-[10px] font-black uppercase tracking-widest text-stone-400 hover:text-stone-600">Cancelar</button>
                 <button type="submit" className="flex-[2] bg-blue-700 hover:bg-blue-800 text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-blue-100 uppercase tracking-widest text-xs">Guardar Apoderado</button>
               </div>
             </form>
