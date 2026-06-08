@@ -402,19 +402,25 @@ export function useStorage() {
         created_at: new Date().toISOString()
       };
 
-      const { error } = await supabase
+      const { data: insertedUsers, error } = await supabase
         .from('usuarios')
-        .insert([userToInsert]);
+        .insert([userToInsert])
+        .select()
+        .single();
 
       if (error) throw error;
-      // Intentar enviar correo con la contraseña provisoria (no bloquear el flujo si falla)
-      sendProvisionalPasswordEmail(userToInsert.email, userToInsert.nombre, provisionalPassword)
-        .then(ok => {
-          if (!ok) console.warn('No se pudo enviar correo con contraseña provisoria a', userToInsert.email);
-        })
-        .catch(e => console.error('Error enviando correo de contraseña provisoria:', e));
 
-      return userToInsert;
+      // Intentar enviar correo con la contraseña provisoria (no bloquear el flujo si falla)
+      let emailSent = false;
+      try {
+        const sent = await sendProvisionalPasswordEmail(insertedUsers.email, insertedUsers.nombre, provisionalPassword);
+        emailSent = !!sent;
+        if (!sent) console.warn('No se pudo enviar correo con contraseña provisoria a', insertedUsers.email);
+      } catch (e) {
+        console.error('Error enviando correo de contraseña provisoria:', e);
+      }
+
+      return { user: insertedUsers, provisionalPassword, emailSent };
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['db', currentSchool?.id] });
@@ -423,11 +429,11 @@ export function useStorage() {
 
   const addApoderado = async (user: Omit<Usuario, 'id' | 'created_at' | 'establecimiento_id'>) => {
     try {
-      await addApoderadoMutation.mutateAsync(user);
-      return true;
+      const result = await addApoderadoMutation.mutateAsync(user);
+      return result; // { user, provisionalPassword, emailSent }
     } catch (err) {
       console.error('Error adding apoderado:', err);
-      return false;
+      return null;
     }
   };
 

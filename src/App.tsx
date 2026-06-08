@@ -1518,17 +1518,28 @@ function Apoderados({ db, addApoderado, showToast, currentUser }: { db: DB, addA
     const formData = new FormData(e.currentTarget);
     const email = formData.get('email') as string;
     const nombre = formData.get('nombre') as string;
-    const password = 'provisional123';
-
     try {
-      await addApoderado({
+      const result = await addApoderado({
         nombre,
         email,
-        password,
         rol: 'apoderado',
         establecimiento_id: currentUser.establecimiento_id
       });
-      showToast('Apoderado agregado exitosamente');
+
+      if (!result) throw new Error('Error al agregar apoderado');
+
+      // result: { user, provisionalPassword, emailSent }
+      const { provisionalPassword, emailSent } = result as any;
+
+      // Si EmailJS no está configurado o el envío falló, mostrar la contraseña en un toast (solo en desarrollo)
+      const emailServiceConfigured = !!import.meta.env.VITE_EMAILJS_SERVICE_ID;
+
+      if (!emailServiceConfigured || !emailSent) {
+        showToast('Apoderado agregado. Contraseña provisoria: ' + provisionalPassword);
+      } else {
+        showToast('Apoderado agregado y correo enviado');
+      }
+
       setIsModalOpen(false);
     } catch (err: any) {
       showToast(err.message || 'Error al agregar apoderado', 'error');
