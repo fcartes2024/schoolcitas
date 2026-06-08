@@ -1340,6 +1340,7 @@ function Reservas({ db, currentUser, showToast, onEditTemas, onPrint, filterDoce
 function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva }: { db: DB, currentUser: Usuario, showToast: (m: string, t?: any) => void, setCurrentView: (v: string) => void, addReserva: (r: Omit<Reserva, 'id' | 'created_at' | 'estado' | 'establecimiento_id'>) => Promise<boolean> }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDocente, setSelectedDocente] = useState<number | null>(null);
+  const [selectedApoderadosMap, setSelectedApoderadosMap] = useState<Record<number, number | null>>({});
 
   const filteredDocentes = db.docentes.filter(d => {
     const user = db.usuarios.find(u => u.id === d.usuario_id);
@@ -1355,15 +1356,25 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
     }
 
     try {
+      let apoderadoId = currentUser.id;
+      if (currentUser.rol === 'docente') {
+        const sel = selectedApoderadosMap[disp.id];
+        if (!sel) {
+          showToast('Selecciona un apoderado antes de agendar', 'error');
+          return;
+        }
+        apoderadoId = sel;
+      }
+
       const success = await addReserva({
         docente_id: disp.docente_id,
-        apoderado_id: currentUser.id,
+        apoderado_id: apoderadoId,
         fecha: disp.fecha,
         hora: disp.hora_inicio,
       });
 
       if (success) {
-        showToast('Â¡Entrevista agendada con Ã©xito!');
+        showToast('¡Entrevista agendada con éxito!');
         setSelectedDocente(null);
         setCurrentView('mis-citas');
       }
@@ -1480,12 +1491,26 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
                       {isReserved ? (
                         <span className="px-5 py-2.5 bg-blue-50 text-blue-100 rounded-xl text-[9px] font-black uppercase tracking-widest border border-blue-100">Ocupado</span>
                       ) : (
-                        <button 
-                          onClick={() => handleReserve(disp)}
-                          className="px-7 py-2.5 bg-blue-700 hover:bg-blue-800 text-white rounded-xl text-[9px] font-black uppercase tracking-widest shadow-lg shadow-blue-100 transition-all active:scale-95 group-hover:scale-105"
-                        >
-                          Agendar Cita
-                        </button>
+                        <div className="flex items-center gap-3">
+                          {currentUser.rol === 'docente' && (
+                            <select
+                              value={(selectedApoderadosMap[disp.id] || '') as any}
+                              onChange={(e) => setSelectedApoderadosMap(prev => ({ ...prev, [disp.id]: e.target.value ? Number(e.target.value) : null }))}
+                              className="text-sm py-2 px-3 border rounded-lg outline-none"
+                            >
+                              <option value="">Seleccionar apoderado</option>
+                              {db.usuarios.filter(u => u.rol === 'apoderado').map(a => (
+                                <option key={a.id} value={a.id}>{a.nombre} — {a.email}</option>
+                              ))}
+                            </select>
+                          )}
+                          <button 
+                            onClick={() => handleReserve(disp)}
+                            className="px-5 py-2.5 bg-blue-700 hover:bg-blue-800 text-white rounded-xl text-[9px] font-black uppercase tracking-widest shadow-lg shadow-blue-100 transition-all active:scale-95"
+                          >
+                            Agendar Cita
+                          </button>
+                        </div>
                       )}
                     </div>
                   );
