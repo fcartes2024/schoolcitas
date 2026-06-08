@@ -60,18 +60,18 @@ export default function AdvancedFilters({
   const hasActiveFilters = searchTerm || dateFrom || dateTo || selectedDocente || selectedEstado;
 
   return (
-    <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden">
+    <div className="bg-white rounded-[2.5rem] border border-blue-100 shadow-sm overflow-hidden">
       {/* Header con búsqueda básica */}
-      <div className="p-6 border-b border-slate-50">
+      <div className="p-6 border-b border-blue-50">
         <div className="flex items-center gap-4">
           <div className="flex-1 relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-blue-400" />
             <input
               type="text"
               placeholder="Buscar por nombre, especialidad o temas..."
               value={searchTerm}
               onChange={(e) => onSearchChange(e.target.value)}
-              className="w-full pl-12 pr-6 py-4 bg-slate-50/50 border-2 border-slate-100 rounded-2xl outline-none focus:bg-white focus:border-blue-200 transition-all font-bold text-slate-900 placeholder-slate-400"
+              className="w-full pl-12 pr-6 py-4 bg-blue-50/50 border-2 border-blue-100 rounded-2xl outline-none focus:bg-white focus:border-blue-200 transition-all font-bold text-blue-900 placeholder-blue-400"
             />
           </div>
           <button
@@ -80,7 +80,7 @@ export default function AdvancedFilters({
               "px-6 py-4 rounded-2xl border-2 transition-all font-bold text-sm uppercase tracking-widest flex items-center gap-2",
               isExpanded
                 ? "bg-blue-600 text-white border-blue-600"
-                : "bg-white text-slate-600 border-slate-200 hover:border-blue-200"
+                : "bg-white text-blue-600 border-blue-200 hover:border-blue-200"
             )}
           >
             <Filter className="w-4 h-4" />
@@ -96,18 +96,18 @@ export default function AdvancedFilters({
             </button>
           )}
         </div>
-        <div className="mt-4 text-xs font-bold text-slate-400 uppercase tracking-widest">
+        <div className="mt-4 text-xs font-bold text-blue-400 uppercase tracking-widest">
           {totalResults} resultado{totalResults !== 1 ? 's' : ''} encontrado{totalResults !== 1 ? 's' : ''}
         </div>
       </div>
 
       {/* Filtros avanzados expandibles */}
       {isExpanded && (
-        <div className="p-6 bg-slate-50/30 border-t border-slate-100">
+        <div className="p-6 bg-blue-50/30 border-t border-blue-100">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Filtro por fecha desde */}
             <div className="space-y-2">
-              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+              <label className="text-[10px] font-black text-blue-400 uppercase tracking-widest flex items-center gap-2">
                 <Calendar className="w-3 h-3" />
                 Fecha desde
               </label>
@@ -115,13 +115,13 @@ export default function AdvancedFilters({
                 type="date"
                 value={dateFrom}
                 onChange={(e) => onDateFromChange(e.target.value)}
-                className="w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-xl outline-none focus:border-blue-300 transition-all font-bold text-sm"
+                className="w-full px-4 py-3 bg-white border-2 border-blue-200 rounded-xl outline-none focus:border-blue-300 transition-all font-bold text-sm"
               />
             </div>
 
             {/* Filtro por fecha hasta */}
             <div className="space-y-2">
-              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+              <label className="text-[10px] font-black text-blue-400 uppercase tracking-widest flex items-center gap-2">
                 <Calendar className="w-3 h-3" />
                 Fecha hasta
               </label>
@@ -129,20 +129,20 @@ export default function AdvancedFilters({
                 type="date"
                 value={dateTo}
                 onChange={(e) => onDateToChange(e.target.value)}
-                className="w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-xl outline-none focus:border-blue-300 transition-all font-bold text-sm"
+                className="w-full px-4 py-3 bg-white border-2 border-blue-200 rounded-xl outline-none focus:border-blue-300 transition-all font-bold text-sm"
               />
             </div>
 
             {/* Filtro por docente */}
             <div className="space-y-2">
-              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+              <label className="text-[10px] font-black text-blue-400 uppercase tracking-widest flex items-center gap-2">
                 <User className="w-3 h-3" />
                 Docente
               </label>
               <select
                 value={selectedDocente}
                 onChange={(e) => onDocenteChange(e.target.value ? Number(e.target.value) : '')}
-                className="w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-xl outline-none focus:border-blue-300 transition-all font-bold text-sm"
+                className="w-full px-4 py-3 bg-white border-2 border-blue-200 rounded-xl outline-none focus:border-blue-300 transition-all font-bold text-sm"
               >
                 <option value="">Todos los docentes</option>
                 {docenteOptions.map(docente => (
@@ -155,13 +155,13 @@ export default function AdvancedFilters({
 
             {/* Filtro por estado */}
             <div className="space-y-2">
-              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+              <label className="text-[10px] font-black text-blue-400 uppercase tracking-widest">
                 Estado
               </label>
               <select
                 value={selectedEstado}
                 onChange={(e) => onEstadoChange(e.target.value)}
-                className="w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-xl outline-none focus:border-blue-300 transition-all font-bold text-sm"
+                className="w-full px-4 py-3 bg-white border-2 border-blue-200 rounded-xl outline-none focus:border-blue-300 transition-all font-bold text-sm"
               >
                 {estadoOptions.map(option => (
                   <option key={option.value} value={option.value}>
@@ -174,9 +174,9 @@ export default function AdvancedFilters({
 
           {/* Indicadores de filtros activos */}
           {hasActiveFilters && (
-            <div className="mt-6 pt-4 border-t border-slate-200">
+            <div className="mt-6 pt-4 border-t border-blue-200">
               <div className="flex flex-wrap gap-2">
-                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Filtros activos:</span>
+                <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Filtros activos:</span>
                 {searchTerm && (
                   <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold">
                     Búsqueda: "{searchTerm}"

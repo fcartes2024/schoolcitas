@@ -55,7 +55,8 @@
   }
 
   .dark .glass-effect {
-    background: rgba(15, 23, 42, 0.8);
+    background: rgba(15, 46, 110, 0.8); /* azul oscuro translúcido */
+    border-color: rgba(99, 102, 241, 0.12);
   }
 
   .calendar-day:hover:not(.disabled):not(.reserved) {

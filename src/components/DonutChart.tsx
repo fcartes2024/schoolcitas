@@ -7,7 +7,7 @@ export default function DonutChart({ data }: { data: Record<string, number> }) {
 
   if (total === 0) {
     return (
-      <div className="w-40 h-40 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-black uppercase tracking-[0.3em]">Sin datos</div>
+      <div className="w-40 h-40 rounded-full bg-blue-50 flex items-center justify-center text-blue-200 text-xs font-black uppercase tracking-[0.3em]">Sin datos</div>
     );
   }
 
@@ -47,8 +47,8 @@ export default function DonutChart({ data }: { data: Record<string, number> }) {
       <svg width="160" height="160" viewBox="0 0 100 100" className="drop-shadow-lg">
         {slices}
         <circle cx="50" cy="50" r="22" fill="white" />
-        <text x="50" y="46" textAnchor="middle" dominantBaseline="middle" className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">Total</text>
-        <text x="50" y="62" textAnchor="middle" dominantBaseline="middle" className="text-xl font-black text-slate-900">{total}</text>
+        <text x="50" y="46" textAnchor="middle" dominantBaseline="middle" className="text-[9px] font-black uppercase tracking-[0.2em] text-blue-400">Total</text>
+        <text x="50" y="62" textAnchor="middle" dominantBaseline="middle" className="text-xl font-black text-blue-900">{total}</text>
       </svg>
     </div>
   );

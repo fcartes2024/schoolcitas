@@ -18,10 +18,10 @@ export function ThemeToggle({ className, showLabel = false }: ThemeToggleProps) 
       onClick={toggleTheme}
       className={cn(
         'p-2 rounded-xl transition-all duration-300',
-        'text-slate-600 dark:text-slate-400',
-        'bg-slate-100 dark:bg-slate-800',
-        'hover:bg-slate-200 dark:hover:bg-slate-700',
-        'border border-slate-200 dark:border-slate-700',
+        'text-blue-600 dark:text-blue-300',
+        'bg-blue-100 dark:bg-blue-800',
+        'hover:bg-blue-200 dark:hover:bg-blue-700',
+        'border border-blue-200 dark:border-blue-700',
         'flex items-center gap-2',
         className
       )}

@@ -16,7 +16,7 @@ export default function PieChart({ data }: { data: Record<string, number> }) {
 
   if (total === 0) {
     return (
-      <div className="w-40 h-40 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-black uppercase tracking-[0.3em]">Sin datos</div>
+      <div className="w-40 h-40 rounded-full bg-blue-50 flex items-center justify-center text-blue-200 text-xs font-black uppercase tracking-[0.3em]">Sin datos</div>
     );
   }
 
@@ -78,8 +78,8 @@ export default function PieChart({ data }: { data: Record<string, number> }) {
           y="42"
           textAnchor="middle"
           dominantBaseline="middle"
-          className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400"
-          fill="#475569"
+          className="text-[9px] font-black uppercase tracking-[0.2em] text-blue-400"
+          fill="#1e3a8a"
         >
           {centerLabel}
         </text>
@@ -88,7 +88,7 @@ export default function PieChart({ data }: { data: Record<string, number> }) {
           y="56"
           textAnchor="middle"
           dominantBaseline="middle"
-          className="text-xl font-black text-slate-900"
+          className="text-xl font-black text-blue-900"
         >
           {centerValue}
         </text>
@@ -98,8 +98,8 @@ export default function PieChart({ data }: { data: Record<string, number> }) {
             y="68"
             textAnchor="middle"
             dominantBaseline="middle"
-            className="text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400"
-            fill="#64748b"
+            className="text-[9px] font-bold uppercase tracking-[0.2em] text-blue-400"
+            fill="#1e3a8a"
           >
             {centerPct}%
           </text>

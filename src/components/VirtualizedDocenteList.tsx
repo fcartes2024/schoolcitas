@@ -18,20 +18,20 @@ const DocenteItem: React.FC<{
   <div style={style} className="px-3 py-2">
     <button
       onClick={() => onSelect(docente.id)}
-      className="w-full text-left p-6 bg-white rounded-[2.5rem] border border-slate-100 transition-all flex items-center justify-between group hover:border-blue-200 hover:shadow-xl hover:scale-[1.02] active:scale-95"
+      className="w-full text-left p-6 bg-white rounded-[2.5rem] border border-blue-100 transition-all flex items-center justify-between group hover:border-blue-200 hover:shadow-xl hover:scale-[1.02] active:scale-95"
     >
       <div className="flex items-center gap-4">
         <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-black text-xl transition-colors group-hover:bg-blue-600 group-hover:text-white">
           {usuario?.nombre.charAt(0).toUpperCase()}
         </div>
         <div>
-          <h4 className="font-black text-slate-900 tracking-tight">{usuario?.nombre}</h4>
+          <h4 className="font-black text-blue-900 tracking-tight">{usuario?.nombre}</h4>
           <p className="text-[10px] font-bold text-blue-600 uppercase tracking-widest">
             {docente.especialidad}
           </p>
         </div>
       </div>
-      <ChevronRight className="w-6 h-6 text-slate-300 group-hover:text-blue-600 transition-transform group-hover:translate-x-1" />
+      <ChevronRight className="w-6 h-6 text-blue-200 group-hover:text-blue-600 transition-transform group-hover:translate-x-1" />
     </button>
   </div>
 );
@@ -59,7 +59,7 @@ export default function VirtualizedDocenteList({
 
   if (docentes.length === 0) {
     return (
-      <div className="text-center py-12 text-slate-400 text-sm font-black uppercase tracking-widest">
+      <div className="text-center py-12 text-blue-400 text-sm font-black uppercase tracking-widest">
         No se encontraron docentes
       </div>
     );
