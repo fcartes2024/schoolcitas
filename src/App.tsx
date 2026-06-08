@@ -1,4 +1,5 @@
 ﻿import React, { useState, useMemo, lazy, Suspense } from 'react';
+import { createPortal } from 'react-dom';
 import { 
   Calendar, 
   CalendarCheck, 
@@ -348,7 +349,6 @@ function App() {
             )}
           </div>
         </div>
-                <Toast {...toast} onClose={() => setToast(prev => ({ ...prev, show: false }))} />
       </div>
     );
   }
@@ -1605,9 +1605,10 @@ function Apoderados({ db, addApoderado, showToast, currentUser }: { db: DB, addA
 
 function Toast({ show, message, type, onClose }: { show: boolean, message: string, type: 'success' | 'error' | 'info', onClose?: () => void }) {
   if (!show) return null;
-  return (
+
+  const node = (
     <div className={cn(
-      "fixed bottom-8 left-1/2 -translate-x-1/2 px-6 py-3 rounded-2xl shadow-2xl z-[100] flex items-center gap-3 fade-in border animate-bounce relative",
+      "fixed bottom-8 left-1/2 -translate-x-1/2 px-6 py-3 rounded-2xl shadow-2xl z-[100] flex items-center gap-3 fade-in border animate-bounce relative pointer-events-auto",
       type === 'success' && "bg-blue-600 text-white border-emerald-500",
       type === 'error' && "bg-rose-600 text-white border-rose-500",
       type === 'info' && "bg-blue-600 text-white border-blue-500"
@@ -1634,6 +1635,9 @@ function Toast({ show, message, type, onClose }: { show: boolean, message: strin
       </button>
     </div>
   );
+
+  if (typeof document === 'undefined') return node;
+  return createPortal(node, document.body);
 }
 
 export default App;
