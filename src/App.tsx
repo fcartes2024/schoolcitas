@@ -1607,7 +1607,7 @@ function Toast({ show, message, type, onClose }: { show: boolean, message: strin
   if (!show) return null;
   return (
     <div className={cn(
-      "fixed bottom-8 left-1/2 -translate-x-1/2 px-6 py-3 rounded-2xl shadow-2xl z-[100] flex items-center gap-3 fade-in border animate-bounce",
+      "fixed bottom-8 left-1/2 -translate-x-1/2 px-6 py-3 rounded-2xl shadow-2xl z-[100] flex items-center gap-3 fade-in border animate-bounce relative",
       type === 'success' && "bg-blue-600 text-white border-emerald-500",
       type === 'error' && "bg-rose-600 text-white border-rose-500",
       type === 'info' && "bg-blue-600 text-white border-blue-500"
@@ -1616,12 +1616,13 @@ function Toast({ show, message, type, onClose }: { show: boolean, message: strin
         {type === 'success' && <CheckCircle className="w-5 h-5" />}
         {type === 'error' && <XCircle className="w-5 h-5" />}
       </div>
-      <span className="text-[11px] font-black uppercase tracking-widest">{message}</span>
+      <span className="text-[11px] font-black uppercase tracking-widest pr-10">{message}</span>
       <button
         onClick={onClose}
         aria-label="Cerrar"
+        title="Cerrar"
         className={cn(
-          "ml-4 -mr-2 p-2 rounded-full shadow-sm flex items-center justify-center",
+          "absolute top-2 right-2 p-2 rounded-full shadow-md flex items-center justify-center z-50",
           type === 'success' && "bg-white text-blue-600",
           type === 'error' && "bg-white text-rose-600",
           type === 'info' && "bg-white text-blue-600"
