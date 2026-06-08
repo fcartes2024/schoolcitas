@@ -1402,7 +1402,7 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
       </div>
 
       <div className="space-y-4">
-        <h3 className="text-[10px] font-black text-stone-400 uppercase tracking-[0.2em] ml-2">Docentes Disponibles</h3>
+        <h3 className="text-[10px] font-black text-blue-100 uppercase tracking-[0.2em] ml-2">Docentes Disponibles</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredDocentes.map(d => {
             const user = db.usuarios.find(u => u.id === d.usuario_id);
@@ -1421,12 +1421,12 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
                     <p className="text-[10px] font-bold text-blue-600 uppercase tracking-widest">
                       {d.especialidad}
                     </p>
-                    <p className="text-[10px] text-stone-400 font-bold uppercase tracking-widest">
+                    <p className="text-[10px] text-blue-100 font-bold uppercase tracking-widest">
                       {user?.nombre} • {d.especialidad}
                     </p>
                   </div>
                 </div>
-                <ChevronRight className="w-6 h-6 text-stone-300 group-hover:text-blue-600 transition-transform group-hover:translate-x-1" />
+                <ChevronRight className="w-6 h-6 text-blue-100 group-hover:text-blue-600 transition-transform group-hover:translate-x-1" />
               </button>
             );
           })}
@@ -1435,9 +1435,9 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
 
       {/* Modal de Horarios */}
       {selectedDocente && (
-        <div className="fixed inset-0 bg-stone-900/40 backdrop-blur-sm z-[70] flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-blue-900/25 backdrop-blur-sm z-[70] flex items-center justify-center p-4">
           <div className="bg-white rounded-[3rem] w-full max-w-2xl shadow-2xl overflow-hidden flex flex-col max-h-[85vh] animate-in zoom-in-95 duration-200">
-            <div className="p-8 border-b border-stone-100 flex items-center justify-between bg-stone-50/50">
+            <div className="p-8 border-b border-blue-100 flex items-center justify-between bg-blue-50/10">
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-2xl bg-blue-600 text-white flex items-center justify-center font-black text-xl shadow-lg shadow-blue-200">
                   {selectedDocenteUser?.nombre.charAt(0).toUpperCase()}
@@ -1449,7 +1449,7 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
               </div>
               <button 
                 onClick={() => setSelectedDocente(null)} 
-                className="p-3 text-stone-400 hover:text-rose-500 hover:bg-rose-50 rounded-2xl transition-all"
+                className="p-3 text-blue-100 hover:text-rose-500 hover:bg-rose-50 rounded-2xl transition-all"
               >
                 <XCircle className="w-8 h-8" />
               </button>
@@ -1466,7 +1466,7 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
                   );
 
                   return (
-                    <div key={disp.id} className="bg-white p-6 rounded-[2rem] border border-stone-100 flex items-center justify-between hover:border-blue-200 transition-all group shadow-sm hover:shadow-md">
+                    <div key={disp.id} className="bg-white p-6 rounded-[2rem] border border-blue-100 flex items-center justify-between hover:border-blue-200 transition-all group shadow-sm hover:shadow-md">
                       <div>
                         <p className="text-sm font-black text-stone-900 uppercase tracking-tighter">
                           {new Date(disp.fecha + 'T00:00:00').toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' })}
@@ -1477,7 +1477,7 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
                         </p>
                       </div>
                       {isReserved ? (
-                        <span className="px-5 py-2.5 bg-stone-50 text-stone-400 rounded-xl text-[9px] font-black uppercase tracking-widest border border-stone-100">Ocupado</span>
+                        <span className="px-5 py-2.5 bg-blue-50 text-blue-100 rounded-xl text-[9px] font-black uppercase tracking-widest border border-blue-100">Ocupado</span>
                       ) : (
                         <button 
                           onClick={() => handleReserve(disp)}
@@ -1491,17 +1491,17 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
                 })
               ) : (
                 <div className="py-16 text-center">
-                  <div className="w-20 h-20 bg-stone-50 rounded-3xl flex items-center justify-center text-stone-200 mx-auto mb-6">
+                  <div className="w-20 h-20 bg-blue-50 rounded-3xl flex items-center justify-center text-blue-200 mx-auto mb-6">
                     <Clock className="w-10 h-10" />
                   </div>
-                  <p className="text-[10px] font-black text-stone-400 uppercase tracking-[0.2em]">Este docente no tiene horarios disponibles</p>
+                    <p className="text-[10px] font-black text-blue-100 uppercase tracking-[0.2em]">Este docente no tiene horarios disponibles</p>
                 </div>
               )}
             </div>
             
-            <div className="p-6 bg-stone-50 border-t border-stone-100 text-center">
-              <p className="text-[9px] text-stone-400 font-bold uppercase tracking-widest">Selecciona un bloque horario para confirmar la entrevista</p>
-            </div>
+              <div className="p-6 bg-blue-50 border-t border-blue-100 text-center">
+                <p className="text-[9px] text-blue-100 font-bold uppercase tracking-widest">Selecciona un bloque horario para confirmar la entrevista</p>
+              </div>
           </div>
         </div>
       )}
