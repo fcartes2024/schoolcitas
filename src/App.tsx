@@ -887,7 +887,7 @@ function Docentes({ db, addDocente, deleteDocente, showToast, currentUser }: { d
           const user = db.usuarios.find(u => u.id === d.usuario_id);
           return (
             <div key={d.id} className="bg-white p-6 rounded-[2rem] border border-blue-100 shadow-sm hover:shadow-xl transition-all group relative overflow-hidden">
-              <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute top-0 right-0 p-4 opacity-100 transition-opacity">
                 <button 
                   onClick={async () => {
                     if (confirm('Â¿Eliminar a este docente y todos sus horarios?')) {
@@ -1105,7 +1105,7 @@ function DisponibilidadView({ db, currentUser, showToast, addDisponibilidad, del
                                 showToast('Horario eliminado');
                               }
                             }}
-                            className="p-2 text-rose-500 hover:bg-rose-50 rounded-xl transition-colors opacity-0 group-hover:opacity-100"
+                            className="p-2 text-rose-500 hover:bg-rose-50 rounded-xl transition-colors opacity-100"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
