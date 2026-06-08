@@ -1623,7 +1623,7 @@ function Toast({ show, message, type, onClose }: { show: boolean, message: strin
         aria-label="Cerrar"
         title="Cerrar"
         className={cn(
-          "absolute top-2 right-2 p-2 rounded-full shadow-md flex items-center justify-center z-50",
+          "absolute top-3 right-3 p-3 sm:top-2 sm:right-2 sm:p-2 rounded-full shadow-lg flex items-center justify-center z-[9999] pointer-events-auto",
           type === 'success' && "bg-white text-blue-600",
           type === 'error' && "bg-white text-rose-600",
           type === 'info' && "bg-white text-blue-600"
