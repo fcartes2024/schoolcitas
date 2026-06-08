@@ -348,7 +348,7 @@ function App() {
             )}
           </div>
         </div>
-        <Toast {...toast} />
+                <Toast {...toast} onClose={() => setToast(prev => ({ ...prev, show: false }))} />
       </div>
     );
   }
@@ -629,7 +629,7 @@ function App() {
         </div>
       )}
 
-      <Toast {...toast} />
+      <Toast {...toast} onClose={() => setToast(prev => ({ ...prev, show: false }))} />
     </div>
   );
 }
@@ -1603,18 +1603,25 @@ function Apoderados({ db, addApoderado, showToast, currentUser }: { db: DB, addA
   );
 }
 
-function Toast({ show, message, type }: { show: boolean, message: string, type: 'success' | 'error' | 'info' }) {
+function Toast({ show, message, type, onClose }: { show: boolean, message: string, type: 'success' | 'error' | 'info', onClose?: () => void }) {
   if (!show) return null;
   return (
     <div className={cn(
-      "fixed bottom-8 left-1/2 -translate-x-1/2 px-8 py-4 rounded-2xl shadow-2xl z-[100] flex items-center gap-3 fade-in border animate-bounce",
+      "fixed bottom-8 left-1/2 -translate-x-1/2 px-6 py-3 rounded-2xl shadow-2xl z-[100] flex items-center gap-3 fade-in border animate-bounce",
       type === 'success' && "bg-blue-600 text-white border-emerald-500",
       type === 'error' && "bg-rose-600 text-white border-rose-500",
       type === 'info' && "bg-blue-600 text-white border-blue-500"
     )}>
-      {type === 'success' && <CheckCircle className="w-5 h-5" />}
-      {type === 'error' && <XCircle className="w-5 h-5" />}
+      <div className="flex items-center gap-3">
+        {type === 'success' && <CheckCircle className="w-5 h-5" />}
+        {type === 'error' && <XCircle className="w-5 h-5" />}
+      </div>
       <span className="text-[11px] font-black uppercase tracking-widest">{message}</span>
+      <button onClick={onClose} aria-label="Cerrar" className="ml-4 -mr-2 p-1 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+          <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+        </svg>
+      </button>
     </div>
   );
 }
