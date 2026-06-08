@@ -1410,7 +1410,7 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
               <button 
                 key={d.id} 
                 onClick={() => setSelectedDocente(d.id)}
-                className="w-full text-left p-6 bg-white rounded-[2.5rem] border border-stone-100 transition-all flex items-center justify-between group hover:border-blue-200 hover:shadow-xl hover:scale-[1.02] active:scale-95"
+                className="w-full text-left p-6 bg-white rounded-[2.5rem] border border-blue-100 transition-all flex items-center justify-between group hover:border-blue-200 hover:shadow-xl hover:scale-[1.02] active:scale-95"
               >
                 <div className="flex items-center gap-4">
                   <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-black text-xl transition-colors group-hover:bg-blue-600 group-hover:text-white">
