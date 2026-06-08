@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import type { DB, Usuario, Reserva, Disponibilidad } from '../types';
 import { supabase } from '../lib/supabase';
-import { sendInterviewConfirmationEmail } from '../lib/email';
+import { sendInterviewConfirmationEmail, sendProvisionalPasswordEmail, generateProvisionalPassword } from '../lib/email';
 import type { SchoolConfig } from '../lib/schoolConfigs';
 import { loginLimiter, registerLimiter, getRateLimitErrorMessage } from '../lib/rateLimiter';
 
@@ -389,9 +389,13 @@ export function useStorage() {
       if (!currentSchool) throw new Error('No se ha seleccionado un colegio');
 
       const normalizedEmail = user.email.trim().toLowerCase();
+      // Generar contraseña provisoria y asignarla al usuario
+      const provisionalPassword = generateProvisionalPassword(10);
+
       const userToInsert = {
         ...user,
         email: normalizedEmail,
+        password: provisionalPassword,
         establecimiento_id: currentSchool.id,
         id: Date.now(),
         rol: 'apoderado' as const,
@@ -403,6 +407,13 @@ export function useStorage() {
         .insert([userToInsert]);
 
       if (error) throw error;
+      // Intentar enviar correo con la contraseña provisoria (no bloquear el flujo si falla)
+      sendProvisionalPasswordEmail(userToInsert.email, userToInsert.nombre, provisionalPassword)
+        .then(ok => {
+          if (!ok) console.warn('No se pudo enviar correo con contraseña provisoria a', userToInsert.email);
+        })
+        .catch(e => console.error('Error enviando correo de contraseña provisoria:', e));
+
       return userToInsert;
     },
     onSuccess: () => {
