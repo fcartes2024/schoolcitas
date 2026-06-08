@@ -483,7 +483,7 @@ function App() {
       case 'dashboard': return <Dashboard db={db} currentUser={currentUser} showToast={showToast} onEditTemas={(id, texto) => setTemasEdit({id, texto})} onPrint={handlePrint} updateReserva={updateReserva} />;
       case 'docentes': return <Docentes db={db} addDocente={addDocente} deleteDocente={deleteDocente} showToast={showToast} currentUser={currentUser} />;
       case 'apoderados': return <Apoderados db={db} addApoderado={addApoderado} showToast={showToast} currentUser={currentUser} />;
-      case 'disponibilidad': return <DisponibilidadView db={db} currentUser={currentUser} showToast={showToast} addDisponibilidad={addDisponibilidad} deleteDisponibilidad={deleteDisponibilidad} />;
+      case 'disponibilidad': return <DisponibilidadView db={db} currentUser={currentUser} showToast={showToast} addDisponibilidad={addDisponibilidad} deleteDisponibilidad={deleteDisponibilidad} addReserva={addReserva} addApoderado={addApoderado} />;
       case 'reservas': return <Reservas db={db} currentUser={currentUser} showToast={showToast} onEditTemas={(id, texto) => setTemasEdit({id, texto})} onPrint={handlePrint} updateReserva={updateReserva} />;
       case 'mis-reservas': return <Reservas db={db} currentUser={currentUser} showToast={showToast} onEditTemas={(id, texto) => setTemasEdit({id, texto})} onPrint={handlePrint} filterDocente={db.docentes.find(d => d.usuario_id === currentUser.id)?.id} updateReserva={updateReserva} />;
       case 'buscar-docentes': return <BuscarDocentes db={db} currentUser={currentUser} showToast={showToast} setCurrentView={setCurrentView} addReserva={addReserva} addApoderado={addApoderado} />;
@@ -951,7 +951,7 @@ function Docentes({ db, addDocente, deleteDocente, showToast, currentUser }: { d
   );
 }
 
-function DisponibilidadView({ db, currentUser, showToast, addDisponibilidad, deleteDisponibilidad }: { db: DB, currentUser: Usuario, showToast: (m: string, t?: any) => void, addDisponibilidad: (d: Disponibilidad[]) => Promise<boolean>, deleteDisponibilidad: (id: number) => Promise<boolean> }) {
+function DisponibilidadView({ db, currentUser, showToast, addDisponibilidad, deleteDisponibilidad, addReserva, addApoderado }: { db: DB, currentUser: Usuario, showToast: (m: string, t?: any) => void, addDisponibilidad: (d: Disponibilidad[]) => Promise<boolean>, deleteDisponibilidad: (id: number) => Promise<boolean>, addReserva: (r: Omit<Reserva, 'id' | 'created_at' | 'estado' | 'establecimiento_id'>) => Promise<boolean>, addApoderado: (u: any) => Promise<any> }) {
   const docente = db.docentes.find(d => d.usuario_id === currentUser.id);
   if (!docente) return <div>Error: No eres un docente registrado.</div>;
 
@@ -1026,7 +1026,72 @@ function DisponibilidadView({ db, currentUser, showToast, addDisponibilidad, del
     }
   };
 
+  // State for scheduling to apoderados from docente profile
+  const [selectedApoderadosMap, setSelectedApoderadosMap] = useState<Record<number, number | null>>({});
+  const [apoderadoSearchMap, setApoderadoSearchMap] = useState<Record<number, string>>({});
+  const [apoderadoDropdownOpen, setApoderadoDropdownOpen] = useState<Record<number, boolean>>({});
+  const [isCreateApoderadoModalOpen, setIsCreateApoderadoModalOpen] = useState(false);
+  const [createApoderadoDispId, setCreateApoderadoDispId] = useState<number | null>(null);
+  const [createApoderadoLoading, setCreateApoderadoLoading] = useState(false);
+
+  const handleReserveForApoderado = async (disp: Disponibilidad) => {
+    const sel = selectedApoderadosMap[disp.id];
+    if (!sel) {
+      showToast('Selecciona un apoderado primero', 'error');
+      return;
+    }
+
+    try {
+      const payload: any = {
+        docente_id: disp.docente_id,
+        apoderado_id: sel,
+        fecha: disp.fecha,
+        hora: disp.hora_inicio,
+        temas: `Agendado por Docente ${currentUser.nombre}`
+      };
+
+      const success = await addReserva(payload);
+      if (success) {
+        showToast('Cita agendada para apoderado');
+      }
+    } catch (err: any) {
+      showToast(err.message || 'Error al agendar', 'error');
+    }
+  };
+
+  const handleCreateApoderado = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!createApoderadoDispId) return;
+    setCreateApoderadoLoading(true);
+    try {
+      const form = new FormData(e.currentTarget);
+      const nombre = form.get('nombre') as string;
+      const email = form.get('email') as string;
+
+      const result = await addApoderado({ nombre, email, rol: 'apoderado', establecimiento_id: currentUser.establecimiento_id });
+      if (!result) throw new Error('Error creando apoderado');
+      const { user, provisionalPassword, emailSent } = result as any;
+
+      setSelectedApoderadosMap(prev => ({ ...prev, [createApoderadoDispId]: user.id }));
+      setApoderadoSearchMap(prev => ({ ...prev, [createApoderadoDispId]: user.nombre }));
+
+      const emailServiceConfigured = !!import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      if (!emailServiceConfigured || !emailSent) {
+        showToast('Apoderado creado. Contraseña: ' + provisionalPassword);
+      } else {
+        showToast('Apoderado creado y correo enviado');
+      }
+
+      setIsCreateApoderadoModalOpen(false);
+    } catch (err: any) {
+      showToast(err.message || 'Error creando apoderado', 'error');
+    } finally {
+      setCreateApoderadoLoading(false);
+    }
+  };
+
   return (
+    <>
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 fade-in">
       <div className="lg:col-span-1">
         <div className="bg-white p-8 rounded-[2.5rem] border border-blue-100 shadow-sm sticky top-24">
@@ -1100,6 +1165,7 @@ function DisponibilidadView({ db, currentUser, showToast, addDisponibilidad, del
                           </div>
                         </td>
                         <td className="px-8 py-5 text-right">
+                          <div className="flex items-center justify-end gap-3">
                           <button 
                             onClick={async () => {
                               if (confirm('Â¿Eliminar este bloque horario?')) {
@@ -1111,6 +1177,42 @@ function DisponibilidadView({ db, currentUser, showToast, addDisponibilidad, del
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
+
+                          <div>
+                            <div className="relative">
+                              <input
+                                type="text"
+                                placeholder="Buscar apoderado..."
+                                value={apoderadoSearchMap[d.id] || ''}
+                                onChange={(e) => { setApoderadoSearchMap(prev => ({ ...prev, [d.id]: e.target.value })); setApoderadoDropdownOpen(prev => ({ ...prev, [d.id]: true })); }}
+                                onFocus={() => setApoderadoDropdownOpen(prev => ({ ...prev, [d.id]: true }))}
+                                className="text-sm py-2 px-3 border rounded-lg outline-none w-56"
+                              />
+                              {apoderadoDropdownOpen[d.id] && (
+                                <div className="absolute right-0 mt-1 w-56 max-h-44 overflow-auto bg-white border rounded-lg shadow-lg z-40">
+                                  {db.usuarios.filter(u => {
+                                    const q = (apoderadoSearchMap[d.id] || '').trim().toLowerCase();
+                                    return u.rol === 'apoderado' && (q === '' || u.nombre.toLowerCase().includes(q) || u.email.toLowerCase().includes(q));
+                                  }).slice(0,50).map(a => (
+                                    <div key={a.id} onClick={() => { setSelectedApoderadosMap(prev => ({ ...prev, [d.id]: a.id })); setApoderadoSearchMap(prev => ({ ...prev, [d.id]: a.nombre })); setApoderadoDropdownOpen(prev => ({ ...prev, [d.id]: false })); }} className="px-3 py-2 hover:bg-blue-50 cursor-pointer text-sm">
+                                      <div className="font-bold text-blue-900">{a.nombre}</div>
+                                      <div className="text-[11px] text-blue-500">{a.email}</div>
+                                    </div>
+                                  ))}
+                                  {(() => {
+                                    const q = (apoderadoSearchMap[d.id] || '').trim().toLowerCase();
+                                    const any = db.usuarios.some(a => a.rol === 'apoderado' && (a.nombre.toLowerCase().includes(q) || a.email.toLowerCase().includes(q)));
+                                    return (q !== '' && !any) ? <div className="px-3 py-2 text-sm text-blue-500">No hay resultados</div> : null;
+                                  })()}
+                                </div>
+                              )}
+                            </div>
+                            <div className="flex gap-2 mt-2">
+                              <button onClick={() => { setCreateApoderadoDispId(d.id); setIsCreateApoderadoModalOpen(true); }} className="px-3 py-2 bg-white border rounded-lg text-blue-600 text-xs">Crear</button>
+                              <button onClick={() => handleReserveForApoderado(d)} className="px-3 py-2 bg-blue-700 text-white rounded-lg text-xs">Agendar</button>
+                            </div>
+                          </div>
+                          </div>
                         </td>
                       </tr>
                     ))
@@ -1121,6 +1223,29 @@ function DisponibilidadView({ db, currentUser, showToast, addDisponibilidad, del
         </div>
       </div>
     </div>
+
+  {isCreateApoderadoModalOpen && (
+    <div className="fixed inset-0 bg-blue-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-[2.5rem] w-full max-w-md shadow-2xl p-10">
+        <h3 className="text-2xl font-black text-blue-900 mb-8 uppercase tracking-tighter italic">Crear Apoderado Rápido</h3>
+        <form onSubmit={handleCreateApoderado} className="space-y-6">
+          <div className="space-y-2">
+            <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">Nombre Completo</label>
+            <input type="text" name="nombre" required className="w-full px-4 py-4 bg-blue-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
+          </div>
+          <div className="space-y-2">
+            <label className="block text-[10px] font-black text-blue-500 uppercase tracking-widest ml-1">Correo Electrónico</label>
+            <input type="email" name="email" required className="w-full px-4 py-4 bg-blue-50 border-2 border-transparent focus:bg-white focus:border-blue-600 rounded-2xl outline-none transition-all font-bold text-sm" />
+          </div>
+          <div className="flex gap-3 pt-4">
+            <button type="button" onClick={() => setIsCreateApoderadoModalOpen(false)} className="flex-1 px-4 py-4 text-[10px] font-black uppercase tracking-widest text-blue-400 hover:text-blue-600">Cancelar</button>
+            <button type="submit" disabled={createApoderadoLoading} className="flex-[2] bg-blue-700 hover:bg-blue-800 text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-blue-100 uppercase tracking-widest text-xs">{createApoderadoLoading ? 'Creando...' : 'Crear Apoderado'}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  )}
+    </>
   );
 }
 
