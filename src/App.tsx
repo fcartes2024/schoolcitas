@@ -483,7 +483,7 @@ function App() {
     switch(currentView) {
       case 'dashboard': return <Dashboard db={db} currentUser={currentUser} showToast={showToast} onEditTemas={(id, texto) => setTemasEdit({id, texto})} onPrint={handlePrint} updateReserva={updateReserva} />;
       case 'docentes': return <Docentes db={db} addDocente={addDocente} deleteDocente={deleteDocente} showToast={showToast} currentUser={currentUser} />;
-      case 'apoderados': return <Apoderados db={db} addApoderado={addApoderado} showToast={showToast} currentUser={currentUser} />;
+      case 'apoderados': return <Apoderados db={db} addApoderado={addApoderado} addReserva={addReserva} showToast={showToast} currentUser={currentUser} />;
       case 'disponibilidad': return <DisponibilidadView db={db} currentUser={currentUser} showToast={showToast} addDisponibilidad={addDisponibilidad} deleteDisponibilidad={deleteDisponibilidad} addReserva={addReserva} addApoderado={addApoderado} />;
       case 'reservas': return <Reservas db={db} currentUser={currentUser} showToast={showToast} onEditTemas={(id, texto) => setTemasEdit({id, texto})} onPrint={handlePrint} updateReserva={updateReserva} />;
       case 'mis-reservas': return <Reservas db={db} currentUser={currentUser} showToast={showToast} onEditTemas={(id, texto) => setTemasEdit({id, texto})} onPrint={handlePrint} filterDocente={db.docentes.find(d => d.usuario_id === currentUser.id)?.id} updateReserva={updateReserva} />;
@@ -1758,8 +1758,10 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
 }
 
 
-function Apoderados({ db, addApoderado, showToast, currentUser }: { db: DB, addApoderado: (u: any) => Promise<any>, showToast: (m: string, t?: any) => void, currentUser: Usuario }) {
+function Apoderados({ db, addApoderado, addReserva, showToast, currentUser }: { db: DB, addApoderado: (u: any) => Promise<any>, addReserva?: (r: Omit<Reserva, 'id' | 'created_at' | 'estado' | 'establecimiento_id'>) => Promise<boolean>, showToast: (m: string, t?: any) => void, currentUser: Usuario }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [reserveModalApoderado, setReserveModalApoderado] = useState<Usuario | null>(null);
+  const [reserveLoading, setReserveLoading] = useState(false);
 
   const handleAdd = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -1822,6 +1824,11 @@ function Apoderados({ db, addApoderado, showToast, currentUser }: { db: DB, addA
                 <p className="text-[10px] text-blue-600 font-bold uppercase tracking-widest">{apoderado.email}</p>
               </div>
             </div>
+            <div className="mt-4 flex gap-2">
+              {currentUser.rol === 'docente' && (
+                <button onClick={() => { setReserveModalApoderado(apoderado); }} className="px-3 py-2 bg-blue-700 text-white rounded-lg text-xs font-black">Agendar</button>
+              )}
+            </div>
           </div>
         ))}
       </div>
@@ -1844,6 +1851,55 @@ function Apoderados({ db, addApoderado, showToast, currentUser }: { db: DB, addA
                 <button type="submit" className="flex-[2] bg-blue-700 hover:bg-blue-800 text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-blue-100 uppercase tracking-widest text-xs">Guardar Apoderado</button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+      {reserveModalApoderado && (
+        <div className="fixed inset-0 bg-blue-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-[2.5rem] w-full max-w-2xl shadow-2xl p-6">
+            <div className="flex items-center justify-between">
+              <h3 className="text-xl font-black text-blue-900">Agendar para {reserveModalApoderado.nombre}</h3>
+              <button onClick={() => setReserveModalApoderado(null)} className="text-blue-400">Cerrar</button>
+            </div>
+            <div className="mt-4">
+              {currentUser.rol !== 'docente' && <p>Sólo los docentes pueden agendar desde aquí.</p>}
+              {currentUser.rol === 'docente' && (() => {
+                const docente = db.docentes.find(d => d.usuario_id === currentUser.id);
+                if (!docente) return <p>No eres un docente registrado.</p>;
+                const today = new Date().toISOString().split('T')[0];
+                const horarios = db.disponibilidad.filter(h => h.docente_id === docente.id && h.fecha >= today && !db.reservas.some(r => r.docente_id === docente.id && r.fecha === h.fecha && r.hora === h.hora_inicio && r.estado === 'reservado'));
+                if (horarios.length === 0) return <p>No tienes horarios disponibles para agendar.</p>;
+
+                return (
+                  <div className="grid grid-cols-1 gap-3 mt-4">
+                    {horarios.map(h => (
+                      <div key={h.id} className="flex items-center justify-between p-3 border rounded-lg">
+                        <div>
+                          <div className="font-black text-blue-900">{new Date(h.fecha + 'T00:00:00').toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' })}</div>
+                          <div className="text-sm text-blue-600">{h.hora_inicio} - {h.hora_fin}</div>
+                        </div>
+                        <div>
+                          <button onClick={async () => {
+                            if (!addReserva) return;
+                            setReserveLoading(true);
+                            try {
+                              const payload: any = { docente_id: docente.id, apoderado_id: reserveModalApoderado.id, fecha: h.fecha, hora: h.hora_inicio, temas: `Agendado por Docente ${currentUser.nombre}` };
+                              const ok = await addReserva(payload);
+                              if (ok) {
+                                showToast('Reserva creada');
+                                setReserveModalApoderado(null);
+                              }
+                            } catch (err: any) {
+                              showToast(err.message || 'Error al agendar', 'error');
+                            } finally { setReserveLoading(false); }
+                          }} className="px-3 py-2 bg-blue-700 text-white rounded-lg text-sm">{reserveLoading ? 'Agendando...' : 'Agendar'}</button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                );
+              })()}
+            </div>
           </div>
         </div>
       )}
