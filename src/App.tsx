@@ -84,44 +84,7 @@ function App() {
     setTimeout(() => setToast(prev => ({ ...prev, show: false })), 3000);
   };
 
-  const handleCreateApoderado = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!createApoderadoDispId) return;
-    setCreateApoderadoLoading(true);
-    try {
-      const form = new FormData(e.currentTarget);
-      const nombre = form.get('nombre') as string;
-      const email = form.get('email') as string;
-
-      const result = await addApoderado({
-        nombre,
-        email,
-        rol: 'apoderado',
-        establecimiento_id: currentUser.establecimiento_id
-      });
-
-      if (!result) throw new Error('Error al crear apoderado');
-
-      const { user, provisionalPassword, emailSent } = result as any;
-
-      // Assign the newly created apoderado to the pending disponibilidad
-      setSelectedApoderadosMap(prev => ({ ...prev, [createApoderadoDispId]: user.id }));
-      setApoderadoSearchMap(prev => ({ ...prev, [createApoderadoDispId]: user.nombre }));
-
-      const emailServiceConfigured = !!import.meta.env.VITE_EMAILJS_SERVICE_ID;
-      if (!emailServiceConfigured || !emailSent) {
-        showToast('Apoderado creado. Contraseña provisoria: ' + provisionalPassword);
-      } else {
-        showToast('Apoderado creado y correo enviado');
-      }
-
-      setIsCreateApoderadoModalOpen(false);
-    } catch (err: any) {
-      showToast(err.message || 'Error al crear apoderado', 'error');
-    } finally {
-      setCreateApoderadoLoading(false);
-    }
-  };
+  
 
   const handleLoginSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -1433,6 +1396,45 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
     }
   };
 
+  const handleCreateApoderado = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!createApoderadoDispId) return;
+    setCreateApoderadoLoading(true);
+    try {
+      const form = new FormData(e.currentTarget);
+      const nombre = form.get('nombre') as string;
+      const email = form.get('email') as string;
+
+      const result = await addApoderado({
+        nombre,
+        email,
+        rol: 'apoderado',
+        establecimiento_id: currentUser!.establecimiento_id
+      });
+
+      if (!result) throw new Error('Error al crear apoderado');
+
+      const { user, provisionalPassword, emailSent } = result as any;
+
+      // Assign the newly created apoderado to the pending disponibilidad
+      setSelectedApoderadosMap(prev => ({ ...prev, [createApoderadoDispId]: user.id }));
+      setApoderadoSearchMap(prev => ({ ...prev, [createApoderadoDispId]: user.nombre }));
+
+      const emailServiceConfigured = !!import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      if (!emailServiceConfigured || !emailSent) {
+        showToast('Apoderado creado. Contraseña provisoria: ' + provisionalPassword);
+      } else {
+        showToast('Apoderado creado y correo enviado');
+      }
+
+      setIsCreateApoderadoModalOpen(false);
+    } catch (err: any) {
+      showToast(err.message || 'Error al crear apoderado', 'error');
+    } finally {
+      setCreateApoderadoLoading(false);
+    }
+  };
+
   const selectedDocenteData = db.docentes.find(d => d.id === selectedDocente);
   const selectedDocenteUser = selectedDocenteData ? db.usuarios.find(u => u.id === selectedDocenteData.usuario_id) : null;
   const today = new Date().toISOString().split('T')[0];
@@ -1569,7 +1571,7 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
                                                       <div className="text-[11px] text-blue-500">{a.email}</div>
                                                     </div>
                                                   ))}
-                                                  {db.usuarios.filter(u => u.rol === 'apoderado' && ((apoderadoSearchMap[disp.id] || '').trim() !== '' && !db.usuarios.some(a => a.rol==='apoderado' && (a.nombre.toLowerCase().includes((apoderadoSearchMap[disp.id]||'').toLowerCase()) || a.email.toLowerCase().includes((apoderadoSearchMap[disp.id]||'').toLowerCase())))).length > 0 && (
+                                                  {(db.usuarios.filter(u => u.rol === 'apoderado' && ((apoderadoSearchMap[disp.id] || '').trim() !== '' && (u.nombre.toLowerCase().includes((apoderadoSearchMap[disp.id]||'').toLowerCase()) || u.email.toLowerCase().includes((apoderadoSearchMap[disp.id]||'').toLowerCase())))).length === 0) && (
                                                     <div className="px-3 py-2 text-sm text-blue-500">No hay resultados</div>
                                                   )}
                                                 </div>
@@ -1630,7 +1632,7 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
 }
 
 
-function Apoderados({ db, addApoderado, showToast, currentUser }: { db: DB, addApoderado: (u: any) => Promise<boolean>, showToast: (m: string, t?: any) => void, currentUser: Usuario }) {
+function Apoderados({ db, addApoderado, showToast, currentUser }: { db: DB, addApoderado: (u: any) => Promise<any>, showToast: (m: string, t?: any) => void, currentUser: Usuario }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAdd = async (e: React.FormEvent<HTMLFormElement>) => {
