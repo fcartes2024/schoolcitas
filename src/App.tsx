@@ -1811,7 +1811,7 @@ function Apoderados({ db, addApoderado, addReserva, showToast, currentUser }: { 
             placeholder="Buscar apoderado por nombre o email..."
             value={searchApoderado}
             onChange={(e) => setSearchApoderado(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 bg-white/95 dark:bg-blue-900/95 rounded-2xl border border-blue-100 text-sm font-bold outline-none"
+            className="w-full pl-10 pr-4 py-3 bg-white/95 dark:bg-blue-900/95 rounded-2xl border border-blue-100 text-sm font-bold outline-none text-blue-900 dark:text-white placeholder:text-blue-400 dark:placeholder:text-white/50"
           />
         </div>
       </div>
