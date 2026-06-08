@@ -374,6 +374,7 @@ function App() {
       { id: 'dashboard', label: 'Mis Citas', icon: Calendar },
       { id: 'disponibilidad', label: 'Horarios', icon: Clock },
       { id: 'mis-reservas', label: 'Historial', icon: FileText },
+      { id: 'apoderados', label: 'Apoderados', icon: Users },
     ],
     apoderado: [
       { id: 'dashboard', label: 'Inicio', icon: Calendar },
