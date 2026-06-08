@@ -1762,6 +1762,7 @@ function Apoderados({ db, addApoderado, addReserva, showToast, currentUser }: { 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [reserveModalApoderado, setReserveModalApoderado] = useState<Usuario | null>(null);
   const [reserveLoading, setReserveLoading] = useState(false);
+  const [searchApoderado, setSearchApoderado] = useState('');
 
   const handleAdd = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -1798,22 +1799,25 @@ function Apoderados({ db, addApoderado, addReserva, showToast, currentUser }: { 
 
   return (
     <div className="space-y-6 fade-in">
-      <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-black text-blue-900 uppercase tracking-tighter italic">GestiÃ³n de Apoderados</h2>
           <p className="text-[10px] text-blue-600 font-bold uppercase tracking-widest mt-1">Usuarios registrados en el sistema</p>
         </div>
-        <button 
-          onClick={() => setIsModalOpen(true)}
-          className="bg-blue-700 hover:bg-blue-800 text-white font-black px-6 py-3 rounded-2xl transition-all shadow-xl shadow-blue-100 flex items-center gap-2 uppercase tracking-widest text-[10px]"
-        >
-          <Plus className="w-4 h-4" />
-          Nuevo Apoderado
-        </button>
+        <div className="relative w-80">
+          <Search className="absolute left-3 top-3 w-4 h-4 text-blue-400" />
+          <input
+            type="text"
+            placeholder="Buscar apoderado por nombre o email..."
+            value={searchApoderado}
+            onChange={(e) => setSearchApoderado(e.target.value)}
+            className="w-full pl-10 pr-4 py-3 bg-white/95 dark:bg-blue-900/95 rounded-2xl border border-blue-100 text-sm font-bold outline-none"
+          />
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {db.usuarios.filter(u => u.rol === 'apoderado').map(apoderado => (
+        {db.usuarios.filter(u => u.rol === 'apoderado' && (searchApoderado.trim() === '' || u.nombre.toLowerCase().includes(searchApoderado.toLowerCase()) || u.email.toLowerCase().includes(searchApoderado.toLowerCase()))).map(apoderado => (
           <div key={apoderado.id} className="bg-white p-6 rounded-[2rem] border border-blue-100 shadow-sm hover:shadow-xl transition-all group">
             <div className="flex items-center gap-4">
               <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-black text-xl">
