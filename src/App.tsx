@@ -1449,9 +1449,10 @@ function BuscarDocentes({ db, currentUser, showToast, setCurrentView, addReserva
               </div>
               <button 
                 onClick={() => setSelectedDocente(null)} 
-                className="p-3 text-blue-100 hover:text-rose-500 hover:bg-rose-50 rounded-2xl transition-all"
+                aria-label="Cerrar horario"
+                className="p-3 bg-white text-rose-600 ring-2 ring-rose-100 rounded-full shadow-md transition-all"
               >
-                <XCircle className="w-8 h-8" />
+                <XCircle className="w-6 h-6" />
               </button>
             </div>
             
