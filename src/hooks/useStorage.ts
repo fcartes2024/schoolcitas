@@ -422,7 +422,25 @@ export function useStorage() {
 
       return { user: insertedUsers, provisionalPassword, emailSent };
     },
-    onSuccess: () => {
+    // Cuando la inserción es exitosa, actualizamos el cache para mostrar
+    // inmediatamente el nuevo apoderado y también forzamos una refetch
+    onSuccess: (data) => {
+      try {
+        const key = ['db', currentSchool?.id];
+        queryClient.setQueryData<DB | undefined>(key, (old) => {
+          if (!old) return old;
+          // `data` viene como { user, provisionalPassword, emailSent }
+          const inserted = (data as any).user;
+          if (!inserted) return old;
+          return {
+            ...old,
+            usuarios: [...old.usuarios, inserted]
+          };
+        });
+      } catch (e) {
+        console.warn('Error updating cache after addApoderado:', e);
+      }
+
       queryClient.invalidateQueries({ queryKey: ['db', currentSchool?.id] });
     }
   });
