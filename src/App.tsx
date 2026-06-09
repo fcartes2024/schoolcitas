@@ -977,28 +977,60 @@ function DisponibilidadView({ db, currentUser, showToast, addDisponibilidad, del
     const recurringBaseId = Date.now();
     let recurringIndex = 0;
 
+    const useSchoolYear = formData.get('use_school_year') === 'on';
+    const repeatUntilRaw = formData.get('repeat_until') as string | null;
+
     if (repeat) {
       const startDate = new Date((formData.get('fecha') as string) + 'T00:00:00');
-      for (let i = 0; i < weeks; i++) {
-        const d = new Date(startDate);
-        d.setDate(d.getDate() + (i * 7));
-        
-        // Validation: No duplicates for the same day/time
-        const isDuplicate = currentDisp.some(ex => 
-          ex.fecha === d.toISOString().split('T')[0] && 
-          ex.hora_inicio === h1
-        );
 
-        if (!isDuplicate) {
-          newEntries.push({
-            id: recurringBaseId + recurringIndex,
-            establecimiento_id: currentUser.establecimiento_id,
-            docente_id: docente.id,
-            fecha: d.toISOString().split('T')[0],
-            hora_inicio: h1,
-            hora_fin: h2
-          });
-          recurringIndex++;
+      // Determine repeat end logic: explicit date, school year, or number of weeks
+      let repeatUntilDate: Date | null = null;
+      if (useSchoolYear) {
+        const year = startDate.getFullYear();
+        repeatUntilDate = new Date(`${year}-12-31T00:00:00`);
+      } else if (repeatUntilRaw) {
+        repeatUntilDate = new Date(repeatUntilRaw + 'T00:00:00');
+      }
+
+      if (repeatUntilDate) {
+        // Iterate weekly until repeatUntilDate (inclusive)
+        for (let d = new Date(startDate); d <= repeatUntilDate; d.setDate(d.getDate() + 7)) {
+          const dateStr = d.toISOString().split('T')[0];
+          const isDuplicate = currentDisp.some(ex => ex.fecha === dateStr && ex.hora_inicio === h1);
+          if (!isDuplicate) {
+            newEntries.push({
+              id: recurringBaseId + recurringIndex,
+              establecimiento_id: currentUser.establecimiento_id,
+              docente_id: docente.id,
+              fecha: dateStr,
+              hora_inicio: h1,
+              hora_fin: h2
+            });
+            recurringIndex++;
+          }
+        }
+      } else {
+        for (let i = 0; i < weeks; i++) {
+          const d = new Date(startDate);
+          d.setDate(d.getDate() + (i * 7));
+
+          // Validation: No duplicates for the same day/time
+          const isDuplicate = currentDisp.some(ex => 
+            ex.fecha === d.toISOString().split('T')[0] && 
+            ex.hora_inicio === h1
+          );
+
+          if (!isDuplicate) {
+            newEntries.push({
+              id: recurringBaseId + recurringIndex,
+              establecimiento_id: currentUser.establecimiento_id,
+              docente_id: docente.id,
+              fecha: d.toISOString().split('T')[0],
+              hora_inicio: h1,
+              hora_fin: h2
+            });
+            recurringIndex++;
+          }
         }
       }
     } else {
@@ -1119,7 +1151,15 @@ function DisponibilidadView({ db, currentUser, showToast, addDisponibilidad, del
               </label>
               <div className="space-y-2">
                 <label className="block text-[9px] font-black text-blue-400 uppercase tracking-widest ml-1">Número de semanas</label>
-                <input type="number" name="weeks" min="1" max="12" defaultValue="1" className="w-full px-4 py-2 bg-white border-2 border-transparent focus:border-blue-600 rounded-xl outline-none transition-all font-bold text-sm" />
+                <input type="number" name="weeks" min="1" max="52" defaultValue="1" className="w-full px-4 py-2 bg-white border-2 border-transparent focus:border-blue-600 rounded-xl outline-none transition-all font-bold text-sm" />
+              </div>
+              <div className="space-y-2">
+                <label className="flex items-center gap-3">
+                  <input type="checkbox" name="use_school_year" className="w-4 h-4" />
+                  <span className="text-[9px] font-black text-blue-400 uppercase tracking-widest ml-1">Durante el año escolar (hasta 31/12)</span>
+                </label>
+                <label className="block text-[9px] font-black text-blue-400 uppercase tracking-widest ml-1">O repetir hasta</label>
+                <input type="date" name="repeat_until" className="w-full px-4 py-2 bg-white border-2 border-transparent focus:border-blue-600 rounded-xl outline-none transition-all font-bold text-sm" />
               </div>
             </div>
             <button type="submit" className="w-full bg-blue-700 hover:bg-blue-800 text-white font-black py-4 rounded-2xl transition-all shadow-xl shadow-blue-100 uppercase tracking-widest text-xs">Publicar Disponibilidad</button>
