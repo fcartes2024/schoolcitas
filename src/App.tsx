@@ -484,7 +484,7 @@ function App() {
       case 'dashboard': return <Dashboard db={db} currentUser={currentUser} showToast={showToast} onEditTemas={(id, texto) => setTemasEdit({id, texto})} onPrint={handlePrint} updateReserva={updateReserva} />;
       case 'docentes': return <Docentes db={db} addDocente={addDocente} deleteDocente={deleteDocente} showToast={showToast} currentUser={currentUser} />;
       case 'apoderados': return <Apoderados db={db} addApoderado={addApoderado} addReserva={addReserva} showToast={showToast} currentUser={currentUser} />;
-      case 'disponibilidad': return <DisponibilidadView db={db} currentUser={currentUser} showToast={showToast} addDisponibilidad={addDisponibilidad} deleteDisponibilidad={deleteDisponibilidad} addReserva={addReserva} addApoderado={addApoderado} />;
+      case 'disponibilidad': return <DisponibilidadView db={db} currentUser={currentUser} currentSchool={currentSchool} showToast={showToast} addDisponibilidad={addDisponibilidad} deleteDisponibilidad={deleteDisponibilidad} addReserva={addReserva} addApoderado={addApoderado} />;
       case 'reservas': return <Reservas db={db} currentUser={currentUser} showToast={showToast} onEditTemas={(id, texto) => setTemasEdit({id, texto})} onPrint={handlePrint} updateReserva={updateReserva} />;
       case 'mis-reservas': return <Reservas db={db} currentUser={currentUser} showToast={showToast} onEditTemas={(id, texto) => setTemasEdit({id, texto})} onPrint={handlePrint} filterDocente={db.docentes.find(d => d.usuario_id === currentUser.id)?.id} updateReserva={updateReserva} />;
       case 'buscar-docentes': return <BuscarDocentes db={db} currentUser={currentUser} showToast={showToast} setCurrentView={setCurrentView} addReserva={addReserva} addApoderado={addApoderado} />;
@@ -952,7 +952,7 @@ function Docentes({ db, addDocente, deleteDocente, showToast, currentUser }: { d
   );
 }
 
-function DisponibilidadView({ db, currentUser, showToast, addDisponibilidad, deleteDisponibilidad, addReserva, addApoderado }: { db: DB, currentUser: Usuario, showToast: (m: string, t?: any) => void, addDisponibilidad: (d: Disponibilidad[]) => Promise<boolean>, deleteDisponibilidad: (id: number) => Promise<boolean>, addReserva: (r: Omit<Reserva, 'id' | 'created_at' | 'estado' | 'establecimiento_id'>) => Promise<boolean>, addApoderado: (u: any) => Promise<any> }) {
+function DisponibilidadView({ db, currentUser, currentSchool, showToast, addDisponibilidad, deleteDisponibilidad, addReserva, addApoderado }: { db: DB, currentUser: Usuario, currentSchool?: any, showToast: (m: string, t?: any) => void, addDisponibilidad: (d: Disponibilidad[]) => Promise<boolean>, deleteDisponibilidad: (id: number) => Promise<boolean>, addReserva: (r: Omit<Reserva, 'id' | 'created_at' | 'estado' | 'establecimiento_id'>) => Promise<boolean>, addApoderado: (u: any) => Promise<any> }) {
   const docente = db.docentes.find(d => d.usuario_id === currentUser.id);
   if (!docente) return <div>Error: No eres un docente registrado.</div>;
 
@@ -987,7 +987,8 @@ function DisponibilidadView({ db, currentUser, showToast, addDisponibilidad, del
       let repeatUntilDate: Date | null = null;
       if (useSchoolYear) {
         const year = startDate.getFullYear();
-        repeatUntilDate = new Date(`${year}-12-31T00:00:00`);
+        const endMD = currentSchool?.schoolYearEnd || '12-31';
+        repeatUntilDate = new Date(`${year}-${endMD}T00:00:00`);
       } else if (repeatUntilRaw) {
         repeatUntilDate = new Date(repeatUntilRaw + 'T00:00:00');
       }
